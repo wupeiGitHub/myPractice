@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" charset="UTF-8" content="text/html">
+		<title></title>
+		<link href="" rel="stylesheet" type="text/css" />
+		<!--<script defer id="s1" type="text/javascript"></script>--> 
+		
+		<script language="JavaScript" type="text/javascript">
+			//1.------动态创建script元素:document.createElement
+			/*function loadScriptString(code) {
+			 	var script = document.createElement("script");
+			 	var oHead = document.getElementsByTagName('HEAD').item(0); 
+				 script.type = "text/javascript";
+				 script.src="test.js"; 
+				 try {
+				 	script.appendChild(document.createTextNode(code));
+				 } catch (ex) {
+					 script.text = code; //兼容IE和早起的safari
+				 }
+				 //document.body.appendChild(script);
+				 oHead.appendChild(script);
+			}
+			loadScriptString("已经被加载");*/
+			
+			//2.-----------直接document.write
+			//document.write("<script src='test.js'><\/script>"); 
+			
+			//3-------------动态改变已有script的src属性
+			//现在上面定义：<script id="s1"><\/script> 
+			//s1.src="test.js";
+			
+			//alert("主页面动态加载test.js并取其中的变量：str = ", str); //str未定义
+			
+			//-----------------------4. defer和async的区别？
+			//1)不适用 defer和async 	
+				//没有 defer 或 async，浏览器会立即加载并执行指定的脚本，“立即”指的是在渲染该 script 标签之下的文档元素之前，
+				//也就是说不等待后续载入的文档元素，读到就加载并执行。
+				//<script src="script.js"><\/script>
+			//2)async 
+				//有 async，加载和渲染后续文档元素的过程将和 script.js 的加载与执行并行进行（异步）。
+				//async 则是一个乱序执行的主，反正对它来说脚本的加载和执行是紧紧挨着的，所以不管你声明的顺序如何，只要它加载完了就会立刻执行
+				//异步脚本：async属性也只适用于外部脚本文件，并告诉浏览器立即下载文件。 
+				//但与defer不同的是：标记为async的脚本并不保证按照指定它们的先后顺序执行。
+				//<script async src="script.js"><\/script>
+			//3)defer:延迟脚本：defer属性只适用于外部脚本文件。 
+				//有 defer，加载后续文档元素的过程将和 script.js 的加载并行进行（异步），
+				//但是 script.js 的执行要在所有元素解析完成之后，DOMContentLoaded 事件触发之前完成。
+		  		//它是按照加载顺序执行脚本的，这一点要善加利用
+		  		//<script defer src="myscript.js"><\/script>
+		  		//延迟脚本：defer属性只适用于外部脚本文件。 
+				//如果给script标签定义了defer属性，这个属性的作用是表明脚本在执行时不会影响页面的构造。
+				//也就是说，脚本会被延迟到整个页面都解析完毕后再运行。因此，如果script元素中设置了defer属性，相当于告诉浏览器立即下载，但延迟执行。
+		 </script>
+		 
+		 <script>
+			//兼容不同浏览器的写法
+			//从实用角度来说，把所有脚本都放在 </body> 之前是最佳实践，因为对于旧浏览器来说这是唯一的优化选择，此法可保证非脚本的其他一切元素能够以最快的速度得到加载和解析。 
+			//**注意：**defer属性在浏览器之间表现并不一致。为了避免跨浏览器的差异，可以使用 “lazy loading”的方法，即直到用到该脚本时才加载。
+			function lazyload() {
+			 	var elem = document.createElement("script");
+			 		elem.type = "text/javascript";
+			 		//elem.async = true;
+			 		elem.defer = true;
+			 		elem.src = "test.js";
+			 	console.log(elem);
+			 	
+			 	document.body.appendChild(elem); //追加到body之后
+			 	//var body = document.getElementsByTagName("body")[0];
+			 	//console.log(body);
+			 	//body.appendChild(elem);
+			}
+ 			//监听事件
+			if (window.addEventListener) {
+				 window.addEventListener("load", lazyload, false);
+			} else if (window.attachEvent) {
+				 window.attachEvent("onload", lazyload);
+			} else {
+			 	window.onload = lazyload;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			内容区.............................
+				内容区.............................
+					内容区.............................
+					
+		</div>
+	</body>
+</html>

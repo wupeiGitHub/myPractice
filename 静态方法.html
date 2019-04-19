@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*function StaticClass(){}; //
+			StaticClass.count = 0; //这是一个静态属性
+			StaticClass.add = function(){
+				console.log('这是一个静态方法');
+			}
+			StaticClass.add(); //静态方法调用： 类.方法名
+			console.log(StaticClass.count);*/
+			
+			
+			//1.构造方法：构造一个对象Person方法
+			//命名函数
+			function Person(){
+				this.name="liu";
+				this.age=25;
+				//实例方法2：通过this指针来定义实例方法（变量）
+				this.sayAge2=function(){
+					console.log("实例方法222")
+				}
+			}
+			 
+			//2.静态方法；
+			Person.sayName=function(){
+				console.log("liu---静态方法")
+			}
+			 
+			//3.实例方法：即为通过prototype原型引用定义的实例方法
+			Person.prototype.sayAge1=function(){
+				console.log("实例方法111")
+			}
+			 
+			//静态方法调用
+			Person.sayName(); 
+			var person = new Person();
+			person.sayAge1(); //实例方法调用
+			person.sayAge2(); //实例方法2调用
+			
+			//实例方法3：在实例上直接定义方法（变量）
+			person.sayAge3 = function(){
+				console.log("实例方法333")
+			}
+			person.sayAge3(); //实例方法3调用
+			
+			//---------------方法名相同时，不同情况下的实例方法的谁的优先级高-----------------------------
+			//----匿名函数表达式
+			var BaseClass = function() {  
+				this.method1 = function(){  
+				       console.log('2: Defined by the "this" in the instance method');  
+				 }  
+			};  
+			var instance1 = new BaseClass();  
+			instance1.method11 = function(){  
+			     console.log(' 1: Defined directly in the instance method');  
+			}  
+			BaseClass.prototype.method1 = function(){  
+			     console.log(' 3: Defined by the prototype instance method ');  
+			}  
+			instance1.method1(); //new方法覆盖 > this方法 this方法 > 覆盖原型prototype方法
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

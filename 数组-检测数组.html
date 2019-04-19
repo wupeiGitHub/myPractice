@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>判断是否是数组</title>
+		<script>
+			//-----------------1.typeof
+			//缺点：数组的本质是一种特殊的对象，所以返回'object'。typeof运算符只能用来区分原始类型和对象类型,所以无法具体的检测出Array
+			var arr = [1,2,3];
+			console.log("typeof 比较数组结果：", typeof arr);//'object'
+			
+			
+			//---------------2.instanceOf
+				//如果存在不同的全局环境，就会存在不同版本的Array构造函数，
+				//如果从一个框架向另一个框架传入一个数组，那么传入的数组与在第二个框架中原生创建的数组分别具有各自不同的构造函数，
+				//这时候使用instanceof检测就不准确了
+			var arr = [1,2,3];
+			console.log("instanceof 比较数组结果：",  arr instanceof Array);//true
+			
+			//---------------3.toString
+			//通过引用Object的toString()方法来检查对象的类属性，对数组而言该属性的值总是"Array"
+			var arr = [1,2,3];
+			function type(obj){
+				//console.log("Object.prototype :", Object.prototype); //ƒunction toString() { [native code] }
+				//console.log("Object.prototype.toString :", Object.prototype.toString); //ƒunction toString() { [native code] }
+				//console.log("Object.prototype.toString.call(obj) :", Object.prototype.toString.call(obj)); //[object Array]
+				//-------------------写法1
+				var newObj = Object.prototype.toString.call(obj); //[object Array]
+				//对返回的字符串进行截取最后几位的长度，并转为小写
+				newObj = newObj.slice(8,-1).toLowerCase(); 
+				//-----------------写法2
+				//var newObj = obj.constructor.toString();  // function Array() { [native code] }
+				//对返回的字符串进行截取最后几位的长度，并转为小写
+				//newObj = newObj.substr(8,6).toLowerCase();  //array
+			    return newObj;
+			}
+			console.log("Object的toString 比较数组结果：", type(arr));//'array'
+			
+			
+			//----------------4.isArray
+			//ECMAScript5新增了Array.isArray()方法
+			var arr = [1,2,3];
+			console.log(Array.isArray(arr)); //true
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

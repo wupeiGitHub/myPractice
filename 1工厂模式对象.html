@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//工厂模式：简单理解为工厂里创建一样的商品。
+			//抽象了创建对象的过程，通过在函数内部创建一个对象，为其添加属性和方法，并将对象返回，从而实现创建多个对象的目的；
+			function createPerson(name, age) {
+				 var o = new Object();
+				 	o.name = name;
+				 	o.age = age;
+					o.sayName = function() { 
+					  	console.log('name = '+this.name);
+					};
+				 return o;
+			}
+			var person1 = createPerson("Nicholas", 29);
+			var person2 = createPerson("Greg", 27);
+			console.log(person1, person1.name); //{name: "Nicholas", age: 29, sayName: ƒ} "Nicholas"
+			console.log(person2, person2.name); //{name: "Greg", age: 27, sayName: ƒ} "Greg"
+			person2.sayName();
+			//优点：能够解决创建多个对象的问题，兼容各个浏览器
+			// 缺点：没有解决对象识别的问题，不能知道一个对象的类型
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

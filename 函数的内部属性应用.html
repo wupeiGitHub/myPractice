@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//案例3
+			/*function fn1(num){
+				if(num <=1){
+					return 1;
+				}else{
+					return num * fn1(num-1);
+				}
+			}*/
+			
+			function fn1(num){
+				if(num <=1){
+					return 1;
+				}else{
+					return num * arguments.callee(num-1); //fn1= arguments.callee
+				}
+			}
+			var fn3= fn1; 
+			//fn1 = function(){return 0}; //给fn1重新赋值
+			//fn1 = ()=>0;//给fn1重新赋值
+			//调用函数
+			console.log(fn3(5)); //120
+			console.log(fn1(5));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

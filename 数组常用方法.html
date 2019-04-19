@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//伪数组 arguments和获取到的Dom节点
+			console.log([...'1345']);
+			var a = ['html','css','js','es6','vue'];
+			 //var a = ['html','css','js','es6','vue'];
+//			 console.log(a);
+//			 console.log(a.toString());
+//			 console.log(a.valueOf());
+			 //数组后追加内容
+			 //console.log(a.push('3333','4444'));//7
+			 //console.log(a.toString()); //html,css,js,es6,vue,3333,4444
+			 
+			 //数组后移除内容
+			 //console.log(a.pop());//vue
+			 //console.log(a.toString()); //html,css,js,es6
+			 
+			 //数组前追加内容
+			 //console.log(a.unshift("top","green")); //7
+			 //console.log(a.toString()); //top,green,html,css,js,es6,vue
+			 
+			 //数组前移除内容
+			 //console.log(a.shift()); //html
+			 //console.log(a.toString()); //css,js,es6,vue
+			 
+			 
+			 //every函数： 对数组arrNum中每一项运行给定的匿名函数，如果该函数的每一项都返回ture，则方法返回值为true
+			 /*var arrNum = [1,4,4,9,10,30,12,3,6, 5];
+			 var e1 = arrNum.every(function(value,index,arr){
+			 	console.log('index = ',index, 'value = ', value );
+			 	if(value > 0){//value > 0 时el的值返回true, value > 0就返回false
+			 		console.log(value, index, arr);
+			 		return true;
+			 	}
+			 });
+			 console.log(e1); */
+			
+			 //some函数： 对数组arrNum中每一项运行给定的匿名函数，如果该函数的有任何一项返回ture，则方法返回值为true
+			 /*var e1 = arrNum.some(function(value,index,arr){
+			 	console.log('index = ',index, 'value = ', value );
+			 	if(value > 10){//只要满足一次，最后el返回值就是true
+			 		console.log('满足条件的数组下标值是 ', index, '值是 ', value);
+			 		return true;
+			 	}
+			 });
+			 console.log(e1); //true*/
+			
+			//filter： 过滤数组中的每一项的值并返回出来过滤后的新的数组值
+			/*var e1 = arrNum.filter(function(value,index,arr){
+			 	if(value > 5){//只要满足一次，最后el返回值就是true
+			 		console.log('满足条件的数组下标值是 ', index, '值是 ', value);
+			 		return value;
+			 	}
+			 	//或者简写成
+			 	//return value > 5;
+			 });
+			 console.log(e1); // [9, 10, 30, 12, 6]*/
+			 
+			//map： 返回函数中每次调用后执行的新的数组值
+			/*var e1 = arrNum.map(function(value,index,arr){
+			 	//return value > 5; //true或者false
+			 	return value*2; //value*2的数值
+			 });
+			 console.log(e1); //[false, false, false, true, true, true, true, false, true, false]
+							  //[2, 8, 8, 18, 20, 60, 24, 6, 12, 10]*/
+							  
+							  
+			//forEach（）方法没有返回值或者说是undefined，类似for循环的一个效果
+			/*var e1 = arrNum.forEach(function(value,index,arr){
+				if(!isNaN(value)){
+					console.log('满足条件的数组下标值是 ', index, '值是 ', value);
+				}
+				//return 2; //无效的返回值
+			 });
+			console.log(e1); //undefined*/
+			
+			
+			//console.log("Math.floor(11.34) : 向下取整数"+Math.floor(11.34));
+			//console.log("Math.ceil(11.34) : 向上取整数"+Math.ceil(11.34));
+
+						 
+			 var arr = [1,2,3,4,5];
+			 console.log('三个点的用法： ', ...arr); //1 2 3 4 5
+			 console.log('join()用法 ： ',  arr.join('-') );  //1-2-3-4-5
+			 //slice的截取数组用法
+			 console.log('slice用法 ： ',  arr.slice());  //[1, 2, 3, 4, 5]
+			 console.log('slice(2)用法 ： ',  arr.slice(2));  // [3, 4, 5]
+			 console.log('slice(2，3)用法 ： ',  arr.slice(2,3));  // [3] 从下标值2不包含开始截取到3的下标（不包含介绍下标）
+			
+			
+			 //splice数组的删除用法(参数1:开始下标 ，参数2：删除的项数)
+			 var arr = [1,2,3,4,5];
+			 console.log(arr);
+			 console.log('splice(0,1)用法 ： ',  arr.splice(0,1));  //删除数组第一项的值 [1]
+			 console.log('操作后的原来数组发生改变', arr); //[2,3,4,5] */ 
+			 
+			 //splice数组的插入用法(参数1:开始下标 ，参数2：删除的项数)
+//			 var arr = [1,2,3,4,5];
+//			 console.log(arr);
+//			 console.log('splice(1，0，‘插入参数项’)用法 ： ',  arr.splice(1,0, 'wupei',{name:'wp', age:10}));  //删除数组第一项的值
+//			 console.log('操作后的原来数组改为：', arr); //[1, "wupei",{name:'wp', age:10}, 2, 3, 4, 5]
+			 
+			 //splice数组的删除并替换用法(参数1:开始下标 ，参数2：删除的项数， 参数3....是被替换的项值)
+			 var arr = [1,2,3,4,5];
+			 console.log(arr);
+			 ////把原数组第0个下标开始删除1项后并把删除部分替换为后面的参数
+			 console.log('splice(0，1，‘插入参数项’)用法 ： ',  arr.splice(0,1, 'wupei', 90));  //[1]
+			 console.log('操作后的原来数组改为：', arr); //["wupei", 90, 2, 3, 4, 5]
+			 
+			 //---------------Es6中的copyWithin 
+			 //语法：array.copyWithin(target（拷贝位置，必填）, start（元素复制开始位置）, end（结束位置）)
+				/*target	必需。复制到指定目标索引位置。
+				start	可选。元素复制的起始位置。
+				end	可选。停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数。*/
+			 //原数组会改变
+			 var arr = [1,2,3,4,5];
+			 console.log(arr.copyWithin());
+			 console.log("copyWithin后的数组" ,arr); //原数组 [1,2,3,4,5];
+			 arr = [1,2,3,4,5];
+			 arr.copyWithin(4, 1, -1); 
+			 console.log("arr.copyWithin(4, 1, -1) 复制后的数组" ,arr); // [1, 2, 3, 4, 2]
+			 arr = [1,2,3,4,5];
+			 arr.copyWithin(2, 0); 
+			 console.log("arr.copyWithin(2, 0) 复制后的数组" ,arr); // [1, 2, 1, 2, 3]
+			 
+			 //------Es6:fill() 方法用于将一个固定值替换数组的元素。
+			// 语法: array.fill(value, start, end)
+			/*value	必需。填充的值。
+			start	可选。开始填充位置。
+			end	可选。停止填充位置 不包含自身(默认为 array.length)*/
+			var arr = [1,2,3,4,5];
+			arr.fill('6'); 
+			console.log("arr.fill('6') 填充后的数组" ,arr); //["6", "6", "6", "6", "6"]
+			var arr = [1,2,3,4,5];
+			arr.fill(6,2,4); 
+			console.log("arr.fill('6',2,4); 填充后的数组" ,arr); // [1, 2, 6, 6, 5]
+			
+			
+			//array.toSource();
+			//返回表示该数组的源代码的字符串。
+			/*var arr = [1,2,3,4,5];
+			console.log("arr.toSource('6',2,4); 源代码的字符串" ,arr.toSource()); //不支持
+			console.log("arr 后" ,arr);*/
+			
+			//------Es6:includes(searchvalue,start) 查找某个字符串是否存在
+			/*includes() 方法用于判断字符串是否包含指定的子字符串。
+			如果找到匹配的字符串则返回 true，否则返回 false。
+				searchvalue	必需，要查找的字符串。
+				start	可选，设置从那个位置开始查找，默认为 0。
+			注意： includes() 方法区分大小写。*/
+			var str = "Hello world, welcome to the Runoob。";
+			var n = str.includes("world"); //true
+			console.log("str.includes(\"world\") 判断world是否存在 ：", n); //true
+			console.log("str.includes(\"World\") 判断World是否存在 ：", str.includes("World")); //false
+			console.log("str.includes(\"world\", 11) 判断World是否存在 ：", str.includes("world", 11)); //false
+			
+			//Es6的遍历方法  entries() 
+			//从数组 fruit 创建一个可迭代对象， 该对象包含了数组的键值对：
+			var arr = [1,2,3,4,5];
+			var entries = arr.entries(); //Array Iterator {key,value}
+			console.log(entries.next().value);  // [0, 1]
+			console.log(entries.next().value);  // [1, 2]
+			
+			//Es6的遍历方法  keys()
+			for (let index of arr.keys()) {
+				console.log("遍历数组的keys方法:index = ", index);
+			}
+			//Es6的遍历方法  keys()
+			for (let value of arr.values()) {
+				console.log("遍历数组的values方法:value = ", value);
+			}
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

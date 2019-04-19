@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var a = [0, 1, 2, 3, 4, 5];
+			console.log("----------原数组a：", a); 
+			//1.当删除用，传一个参数表示从第几位开始到结尾都被删除
+			//console.log("a.splice(3) 删除的数组有：", a.splice(3));  // [3, 4, 5]
+			//console.log("删除后的原数组为：", a);  //[0, 1, 2]
+			//当删除用，传2个参数：开始删除的位置， 删除的个数
+			console.log("a.splice(3,1) 删除的数组有：", a.splice(3,1));  // [3]
+			console.log("删除后的原数组为：", a); //[0, 1, 2, 4, 5]
+			
+			//2：插入用法
+			var b = [0, 1, 2, 3, 4, 5];
+			console.log("----------原数组b：", b); 
+			//当插入用，传一个三个参数: 开始删除的位置, 0, 插入的值
+			console.log("b.splice(3, 0, 99,88) 插入：", b.splice(3, 0, 99,88));  //[]表示删除内容为空
+			console.log("后的原数组为：", b); //[0, 1, 2, 99, 88, 3, 4, 5]
+			
+			
+			//3.删除部分替换
+			var c = [0, 1, 2, 3, 4, 5];
+			console.log("----------原数组c：", c); 
+			//当插入用，传一个三个参数: 开始删除的位置, 删除个数, 插入的值
+			console.log("c.splice(3, 1, 99,88) 插入：", c.splice(3, 1, 66,666));  //[3] 被删除
+			console.log("后的原数组为：", c); //[0, 1, 2, 66, 666, 4, 5]
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

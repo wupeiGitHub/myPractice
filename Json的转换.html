@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var js1 = '[1,3,4.4,54,33,3,3]'; //数组形式的字符串
+			var js2 = '{"name":"wupei", "age": 20, "sex": "女"}'; //对象形式的字符串
+			//JSON.parse: 把JSON格式字符串转成对象
+			var obj1 = JSON.parse(js1);
+			console.log(obj1, typeof obj1, obj1[0]); //[1, 3, 4.4, 54, 33, 3, 3] "object"
+			var obj2 = JSON.parse(js2);
+			console.log(obj2, typeof obj2, 'name = '+obj2['name'], 'age='+obj2.age); //{name: "wupei", age: 20, sex: "女"} "object"
+			
+			
+			 //JSON.stringify 把对象格式转成JSON格式的字符串
+			var arr = [1, 3, 4.4, 54, 33, 3, 3];
+			var obj = {name: "wupei", age: 20, sex: "女"};
+			var str1 = JSON.stringify(arr);
+			console.log(str1, typeof str1,); //[1,3,4.4,54,33,3,3] string
+			var str2 = JSON.stringify(obj); 
+			console.log(str2, typeof str2) ; //{"name":"wupei","age":20,"sex":"女"} string
+			 
+			 //eval解析, 它主要用来解析代码的
+			var ev =  eval('var x=10;y=20;document.write(x*y)');
+			console.log(ev,  x, y); //undefined, 10, 20 
+			var a = eval('({"name":"li"})');	
+			console.log(a, a.name);  //{name: "li"} ,  "li"
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

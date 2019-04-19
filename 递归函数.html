@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*递归和循环区别在于，循环是执行一段代码，仅仅参数不同；递归要调用到自己。
+			打个比方：循环就像在同一个地方打转；
+			递归是一层一层进入，再原路返回，虽然每一层都一样。*/
+			var i =1;
+			function f(num){ 
+				if(num<1){  //递归调用的结束条件
+					console.log("调用结束了。。。。。。。。");
+					return 1; 
+				}else{ 
+					console.log('递归调用开始了 i=', i)
+					i++;
+					//console.log(num-1);
+					var newNum = f(num-1)*num; //24*5=120
+					//console.log(newNum); //返回值的顺序是1， 2， 6， 24； 
+					return newNum;  //递归调用
+				} 
+			}
+			var a = f(5); //120
+			var b = f(-1); //1
+			console.log(' a = ', a,  ' b = ', b); 
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

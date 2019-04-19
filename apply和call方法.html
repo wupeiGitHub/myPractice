@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//apply和call方法
+			//语法:
+			/*apply()方法*/
+			//function.apply(thisObj[, argArray]);
+			/*call()方法*/
+			//function.call(thisObj[, arg1[, arg2[, [,...argN]]]]);
+			
+			/*相同点: 都是调用一个对象的一个方法，用另一个对象替换当前对象
+			作用: 用于在对象间共享方法（使用同一个函数），减少代码量，提高代码复用率
+			不同点: apply最多只能有两个参数——新this对象和一个数组argArray;
+					call则可以传递多个参数,第一个参数和apply一样,是用来替换的对象.后边是参数列表*/
+					
+//		     B.apply(A, arguments); //即A对象调用B对象的方法 /B在A中执行/B被A调用
+//		     B.call(A, args1,args2); //即A对象调用B对象的方法
+		     
+/*		     function Dog(){
+		     	this.name = 'dog';
+		     	this.showname = function(){
+		     		console.log("this is a "+this.name);
+		     	};
+		     }
+		     function Cat(){
+		     	this.name = 'cat';
+		     	this.showname = function(){
+		     		console.log("cat is eat fish");
+		     	};
+		     	this.agest = 10;
+		     	//Dog.apply(this); //当前方法会被Dog里的方法替代
+		     }
+		     var cat = new Cat();
+		     cat.showname(); 
+		     console.log(cat.name, cat.agest); 
+		     //获取对象（函数中）中属性方式 cat['age'] 等价于 cat.age
+		     Dog.call(cat); //Dog方法在cat对象中执行/ cat对象调用Dog方法/ Dog方法被cat对象调用
+		     cat.showname(); 
+		     console.log(cat.name, cat.agest); */
+
+//		     var dog = new Dog();
+//		      Cat.call(dog);
+//		      dog.showname(); 
+//		     console.log(dog.name); 
+
+//			 var a = {name:'wupei'}, b = {name: 'lixiaohu'};
+//			 function show(age, sex){
+//			 	 console.log('My name is '+this.name+'. Age ='+age+' Sex ='+sex);
+//			 	 //console.dir(arguments);
+//			 }
+//			 show.apply(a,['女',28]); //My name is wupei. Age =20 Sex =女
+//			 show.call(b,40,'女'); //My name is wupei. Age =20 Sex =女
+			 //show.call(b);
+
+			 
+			//--------------------方法继承
+			function Animal(name){
+			  this.name = name;
+			  this.showName = function(){
+			        console.log(this.name);    
+			    }    
+			}
+			
+			function Cat(name){
+			  //Animal.apply(this,[name]);    //apply的用法
+			  Animal.call(this,name); //call的用法
+			}
+			
+			var cat = new Cat("我是猫咪");
+			cat.showName();
+			
+			//---------------------多重继承
+			function Class10(){
+			  this.showSub = function(a,b){
+			        console.log(a - b);
+			    }   
+			}
+			
+			function Class11(){
+			  this.showAdd = function(a,b){
+			        console.log(a + b);
+			    }  
+			}
+			
+			function Class12(){ //Class12调用了Class11和Class10方法
+			  Class10.apply(this);
+			  Class11.apply(this);   
+			  // Class10.call(this);
+			  //Class11.call(this);  
+			}
+			
+			var c2 = new Class12();
+			c2.showSub(3,1);    //2
+			c2.showAdd(3,1);    //4
+			
+			//------------------------------关于apply和call的特殊用法
+			//求数组中的最大值
+			var arr = [1,2,3,3,4,45,54,5,6];
+			var max = Math.max.apply(null,arr);
+			console.log(arr , ' 数组中的最大值= ', max);
+			
+			//求数组中的最小值
+			var arr = [1,2,3,3,4,45,54,5,6];
+			var min = Math.min.apply(null,arr);
+			console.log(arr , ' 数组中的最小值 =', min);
+			
+			//合并两个数组，并返回数组的长度
+			var arr1 = [1,2,3,3,4,45,54,5,6];
+			var arr2 = ['1','2','3'];
+			console.log(Array.prototype.push.apply(arr1,arr2)); //12 , [1, 2, 3, 3, 4, 45, 54, 5, 6, "1", "2", "3"] 
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

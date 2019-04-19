@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		
+		
+		//创建变量过程: 1)创建变量名字  2)创建变量的作用范围  3) 预处理过程:把变量提升到作用域的最前面位置
+		/*变量和对象赋值的区别
+		赋值的时候
+			1.解释器先判断要赋的值的类型
+			2.如果是基本数据类型,那么解释器会把要赋的值保存到变量当中.
+			  如果是引用数据类型(对象),那么会把对象的值放入内存中,同时把要访问对象的引用地址放入到变量中.*/
+		
+		//1.对变量或者对象 进行属性方法操作
+		//只有对象才具有属性和方法的, 当对变量进行属性和方法操作时,解释器不会报错但是也没什么效果
+		var a = 12;
+		var b = a;
+//		a.title = 'test';
+//		console.log(a.title); //undefined
+
+		//2.变量的修改 ：
+		//值是基本数据类型时-相当于给变量重新赋值的过程，给b赋值时会先销毁a的值，再重新把a的值赋值给b.
+		var a = 12;
+		var b = a;
+		console.log(a, b);
+		b = 13;
+		console.log(a, b);
+		//值是引用数据类型-对象时，对象复制赋值时相当于把对象的person1引用地址赋值给了变量person，当对person1和person中任意一个属性值修改时，两个对里的属性值都会被修改，因为他们的变量的引用地址是一样的
+		var person1 = {age:30};
+		var person = person1;
+		console.log('person', person);
+		console.log('person1', person1);
+		console.log(person.age, person1.age); //30 30
+		person.age =29;
+		console.log(person.age, person1.age); //29 29
+	</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//--------------定义一个动物类-父类（被继承的对象）
+			function Person(name){
+				this.name = name;
+				this.sum = function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.age = 27; //给够着函数增加原型属性
+			
+			//先封装一个函数容器，用来输出对象和承载继承的基础。
+			function content(obj){
+				function F(){	} //字符字面量的对象
+				F.prototype = obj;
+				return new F(); //返回函数对象
+			}
+			var sup = new Person(); //拿到父类的实例
+			var sup1 = content(sup);
+			console.log(sup1.age); //27 继承了父类函数的属性
+			//缺点： 看起来不像继承。
+			//为了让函数看起来像继承就出来了寄生式继承；
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			window.onload = function(){
+				//var a = document.getElementsByTagName("div")[0];
+				var a = document.getElementById("box");
+				
+				a.onclick = function(evt){
+					evt = evt || evt.target || evt.srcElement; //兼容性设置
+					
+					//------------事件对象的属性
+					//当前事件是否是一个冒泡事件。 true:是， false：不是 
+					console.log(" evt.bubbles :", evt.bubbles);
+					//查看是否冒泡
+					console.log(" evt.cancelBubble :",evt.cancelBubble);
+					//阻止事件的进一步传递，它的使用和evt.bubbles的结果有关，它为true才有效
+					console.log(" evt.stopPropagation :",evt.stopPropagation()); //DOM绑定多个时，只阻止当前事件的向下层传递
+					//DOM绑定多个时，执行当前绑定事件外后，后面的层绑定的事件也将会被阻止
+					console.log(" evt.stopImmediatePropagation :",evt.stopImmediatePropagation()); 
+					
+					//当前的事件是否可以取消默认行为，cancelable
+					console.log(" evt.cancelable :",evt.cancelable);
+					
+					console.log(" evt.currentTarget :",evt.currentTarget); //触发当前事件的当前元素
+					
+					//defaultPrevented判断当前事件是否调用了evt.preventDefault()默认事件方法
+					console.log(" evt.defaultPrevented :",evt.defaultPrevented);
+					//阻止浏览器默认事件方法需要调用：evt.preventDefault()或者在当前事件代码的结尾 return false;
+					console.log(" evt.preventDefault() :",evt.preventDefault());
+					
+					//事件详情
+					console.log("evt.detail :",evt.detail); 
+					
+					//eventPhase: 判断当前事件处于什么阶段。 1：捕获阶段 2：目标阶段 3：冒泡阶段
+					console.log(" evt.eventPhase :",evt.eventPhase);
+					
+					//evt.target当前事件的目标元素
+					console.log(" evt.target :",evt.target);
+				}
+				
+				a.addEventListener('click', function(evt){
+					//evt.target当前事件的目标元素, 可能是内层元素
+					console.log(" evt.target :",evt.target);//
+					//触发当前事件的当前元素,当前事件发生在哪个元素上 ，等同于this
+					console.log(" evt.currentTarget :",evt.currentTarget); 
+					console.log(" this :", this); 
+					//eventPhase: 判断当前事件处于什么阶段。 1：捕获阶段 2：目标阶段 3：冒泡阶段
+					console.log(" evt.eventPhase :",evt.eventPhase);
+					
+					//它的构造方法
+					console.log(" evt.constructor :",evt.constructor); //ƒ MouseEvent() { [native code] }
+					
+					//isTrusted : 判断当前事件是否是浏览器内置的 true是 false：开发人员自定义 的属性
+					console.log(" evt.isTrusted :",evt.isTrusted);
+					
+					//当前事件的类型
+					console.log(" evt.type :",evt.type); //click
+					
+					//当前事件的窗口，类似window
+					//console.log(" evt.view :",evt.view); //
+				},true); //true：表示捕获阶段发生 false:冒泡阶段发生
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+			<div id="box">
+				<div style="width: 100px; height: 200px; background: indianred;">
+						ddddddddd
+				</div>
+			</div>
+	</body>
+</html>

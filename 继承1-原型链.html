@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+		//上节回顾: 工厂模式，构造函数模式，原型模式， 组合模式，动态原型，稳妥模式，寄生构造函数...
+		//这些模式都有一个特点：
+		/*1）所有的函数上有一个特殊的属性叫propotype,而这个属性指向的是一个对象（原型对象），而这个原型对象上又只有一个默认属性叫constructor
+			而这个constructor又指向了构造函数，最后就形成了一个闭环。
+		2）所有的对象上有一个隐藏的属性叫proto, 正常是访问不到的，现在的浏览器一般我们可以通过对象属性__proto__去访问到它的值。
+		 当去访问对象上的属性的时候，会先看对象上有没有这个属性，有就直接访问。
+		 	如果没有就会去找它的__proto__上的原型对象上有没有这个属性，有就访问。
+			由于proto本身也是一个对象，如果还没有就继续往上找proto自己的原型对象上有没有这个属性，原型的最后会指向null
+		//这个过程就是原型链；*/
+		/*var a = {};
+		console.log(a.__proto__); //Object
+		console.log(a.__proto__.__proto__); //null*/
+		
+		//3）添加和赋值给属性值， 会直接在当前对象中对属性进行修改和赋值，不会走原型链的步骤。
+		//JS是一个面试过程的语言，由于他是从java演化或者模拟而来的。所以也是可以模拟继承的。
+		
+		//让b具有b的属性或者a的方法
+		//--------------定义一个动物类-父类（被继承的对象）
+		function Animal (name) {
+		  // 属性
+		  this.name = name || 'Animal';
+		  // 实例方法
+		  this.sleep = function(){
+		    console.log(this.name + '正在睡觉！');
+		  }
+		}
+		// 原型方法
+		Animal.prototype.eat = function(food) {
+		  console.log(this.name + '正在吃：' + food);
+		};
+		
+		//-----------------------1.原型链继承
+		//核心： 将父类的实例作为子类的原型
+		function Cat(){ };
+		Cat.prototype = new Animal(); //不能传参
+		Cat.prototype.name = 'cat'; //必须放在new Animal之后，否则无效
+
+		//　Test Code
+		var cat = new Cat();
+		console.log("cat.name :", cat.name);//cat
+		cat.eat('fish');  //cat正在吃：fish
+		cat.sleep();//cat正在睡觉！
+		//console.log(cat instanceof Animal); //true 
+		//console.log(cat instanceof Cat); //true
+		
+		
+		/*特点：
+			非常纯粹的继承关系，实例是子类的实例，也是父类的实例
+			父类新增原型方法/原型属性，子类都能访问到
+			简单，易于实现
+		缺点：
+			1.要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
+			2.无法实现多继承
+			3.来自原型对象的所有属性被所有实例共享（来自原型对象的引用属性是所有实例共享的）（详细请看附录代码： 示例1）
+			4.创建子类实例时，无法向父类构造函数传参*/
+				
+		//-----------------------1.原型链继承
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/*一、弊端 
+			1.setInterval对自己调用的代码是否报错漠不关心。即使调用的代码报错了，它依然会持续的调用下去 
+			2.setInterval无视网络延迟。在使用ajax轮询服务器是否有新数据时，必定会有一些人会使用setInterval，然而无论网络状况如何，它都会去一遍又一遍的发送请求，如果网络状况不良，一个请求发出，还没有返回结果，它会坚持不懈的继续发送请求，最后导致的结果就是请求堆积。 
+			3.setInterval并不定时。如果它调用的代码执行的时间小于定时的时间，它会跳过调用，这就导致无法按照你需要的执行次数或无法得到你想要的结果。
+			二、解决方案 
+			使用setTimeout代替setInterval。 
+			可以给setTimeout设置时间后，在最后调用自身。如果希望“匀速”触发。可以计算代码执行时间，用希望的延迟减去上次执行的时间。
+			注：有一种想法是将setInterval的延迟时间设置的长于上述的几种时间，来达到绝对的均速调用。但事实上，js的计时器因为自身机制的原因，存在4ms–15ms的误差。
+*/
+
+			//JS是单线程的解释性语言
+			//setInterval是连续时间执行的，但是没有考虑到代码自身执行的时间，可能会导致后面的越来越快的情况
+			//解决setInterval有累计效应带来的性能问题： 办法用setTimeOut代替 setInterval
+			var n = 0;
+			var n2 = 0;
+			function run(){
+				//改造前的时间函数
+				/*var a = setInterval(function(){
+					n++;
+				 	console.log(' setInterval 执行中。。。。'+n);
+				 	 if(n >= 10){
+					 	clearInterval(a); //停止执行
+					 	console.log('停止 setInterval 执行。。。。'+n);
+					 }
+				 },1000);*/
+				 
+				
+				//改造后代码： 在函数体内的最后加上setTimeout(arguments.callee(1000));，时间和外面的时间一致
+				var b = setTimeout(function(){
+				 	console.log(' setTimeout 执行中。。。。'+n2);
+				 	n2++;
+				 	var bTimer = 0;
+				 	if(n2 >= 10){
+					 	clearTimeout(b); //停止执行
+					 	clearTimeout(bTimer); //停止执行
+					 	console.log('bTimer, b 的值为', bTimer, b);
+					 	console.log('停止执行 setTimeout。。。。'+n2);
+					}else{
+						bTimer = setTimeout(arguments.callee(6000));
+					}
+				 },6000);
+			}
+		    run();
+			 
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

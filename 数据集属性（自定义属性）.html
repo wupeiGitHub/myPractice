@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				//用data方式实现自定义属性,更符合HTML的规范
+				//HTML定义用data-自定义名称方式， js获取用 元素.dataset.自定义属性名 访问
+				var sp = document.querySelectorAll("div span");
+				var dataName = sp[0].dataset.name; //数据
+				alert(dataName); //wupei
+				var dataName2 = sp[1].dataset.firstName;
+				alert(dataName2);
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<span class="spans"  data-name = "wupei" > 测试 </span>
+			<span class="spans"  data-first-name = "wupei00002" > 测试 </span>
+		</div>
+	</body>
+</html>

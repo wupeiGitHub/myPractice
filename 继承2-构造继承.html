@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>借用构造函数</title>
+		<script>
+			//-----------------父类方法
+			function Animal (name) {
+			  // 属性
+			  this.name = name || 'Animal';
+			  // 实例方法
+			  this.sleep = function(){
+			    console.log(this.name,'正在睡觉！');
+			  }
+			}
+			//-----------父类的原型方法
+			Animal.prototype.eat = function(food) {
+			  console.log(this.name + '正在吃：' + food);
+			};
+			
+			//-构造继承的核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
+			function Cat(name,...args){
+			  Animal.call(this,name); //把Animal方法放入到当前cat方法中执行。强制更改Animal的原型指向作用域为cat
+			  //Animal.apply(this,arguments); //改变this的指针
+			  console.log(args); //1,3
+			  //this.name = name || 'Tom';
+			}
+			
+			// Test Code
+			//var cat = new Cat();
+			var cat = new Cat('wupei',1,3);
+			//cat.name = 'wupei';
+			console.log(cat.name); //wupei
+			console.log(cat.sleep()); //  wupei 正在睡觉！
+			//cat.eat('fontd'); //报错
+			console.log(cat instanceof Animal); // false
+			console.log(cat instanceof Cat); // true
+//			特点：
+//				1.解决了1中，子类实例共享父类引用属性的问题
+//				2.创建子类实例时，可以向父类传递参数
+//				3.可以实现多继承（call多个父类对象）
+//			缺点：
+//				1.实例并不是父类的实例，只是子类的实例
+//				2.只能继承父类的实例属性和方法，不能继承原型属性/方法
+//				3.无法实现函数复用，每个子类都有父类实例函数的副本，影响性能
+//				推荐指数：★★（缺点3）
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

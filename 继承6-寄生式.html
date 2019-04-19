@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//--------------1.定义一个动物类-父类（被继承的对象）
+			function Person(name){
+				this.name = name;
+				this.sum = function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.age = 27; //给够着函数增加原型属性
+			
+			//2.先封装一个函数容器，用来输出对象和承载继承的基础。
+			function content(obj){
+				function F(){
+					
+				}
+				F.prototype = obj; //继承了传入的参数
+				return new F(); //返回函数对象
+			}
+			//3.上面是原型式的继承，然后下面再给原型式继承套个壳子传递参数
+			function subOjbect(obj){
+				var sub = content(obj);
+				sub.name = 'wuepi';
+				return sub; 
+			}
+			
+			//调用-------
+			var sub2 = subOjbect(new Person());
+			//这个函数经过声明后，就成了可以添加属性的对象了
+			console.log(typeof subOjbect); //function
+			console.log(typeof sub2); //object
+			console.log("name = ", sub2.name); //name =  wuepi
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

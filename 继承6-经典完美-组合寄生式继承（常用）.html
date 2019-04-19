@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			function Person(name){
+				this.name = name;
+				console.log('父类方法被调用了');
+				this.sum = function(){
+					alert(this.name);
+				}
+			}
+			Person.prototype.age = 27; //给够着函数增加原型属性
+			//寄生：在函数内返回对象然后调用
+			//组合：1、函数的原型等于另一个实例。2、在函数中用apply或者call引入另一个构造函数，可传参　
+			//---第一步：定义寄生函数
+			function content(obj){
+				function F(){}
+				F.prototype = obj;
+				return new F();
+			}
+			//content就是F实例的另一种写法
+			var con = content(Person.prototype);
+			//con实例（F实例)的原型继承了父类父类函数的原型
+			//上述代码更像是原型链继承，只不过只继承了原型属性
+			
+			//第二步：组合
+			function Sub(){
+				Person.call(this); //Sub函数继承了父类构造函数的属性
+			}//解决组合式两次调用构造函数属性的缺陷
+			
+			//第三步：继承
+			Sub.prototype = con;
+			con.constructor = Sub;
+			var sub1 = new Sub();
+			//Sub就继承了构造函数属性，父类是来，con的函数属性
+			console.log(sub1.age); 
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

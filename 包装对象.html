@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//js的对象分为基本类型（Undefined,Null,Boolean,Number,String）和引用类型（Object,Array,Date,RegExp等，说白了就是对象）
+			//理解：包装对象对象针对的是基本数据类型里的Boolean, Number, String 而undefined,Null是没有包装对象的
+			//作用：引用类型是有属性和方法的，
+					//但是基本数据类型没有属性和方法，当要获取基本类型中的一些方法时，就会用到包装对象，把基本数据类型包装成一个对象；
+			//区别：他们的生命周期不同：
+			//引用类型所创建的对象，在执行的期间一直在内存中，而基本包装对象只是存在了（new 实例化的）一瞬间。
+			//所以我们无法直接给基本类型添加方法，即使添加了取值的时候也会拿不到设置的值
+			//详解看:https://www.cnblogs.com/moqing/p/5593986.html
+			
+			var str1="Hello",str2="Hello";//原始类型的值
+			console.log(str1== str2);//true
+			console.log(str1=== str2);//true
+			
+			var str1= new String("Hello"),
+				str2= new String("Hello");//包装类型对象，包装类型对象都会有自己独立的引用地址，也叫指针。所以它们虽然值相同但是却不相等
+			console.log(typeof str1);//object
+			console.log(typeof str2);//object
+			console.log(Object instanceof Object);//true
+			console.log(Object instanceof Boolean);//false
+			console.log(str1 == str2);//false
+			console.log({} == {});//false
+			console.log([] == []);//
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

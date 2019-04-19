@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//函数:在函数体内的参数是以数组形式访问的，而且不关心参数的类型
+			
+			
+/*			//有参函数
+ 			function add(a,b){
+				console.log('a', a);
+				console.log('b', b);
+				return a+b;
+			}
+			//console.log(add(1)); //Nan = 1+undefined
+			//console.log(add(1,2)); //3
+			console.log('add函数返回值：', add(1,2,4)); //3， 第三个参数没有用*/
+			
+			
+			//无参函数
+			function add2(){
+				//console.log('arguments', arguments); //返回数组
+				var sum = 0;
+				for(var v in arguments){
+					console.log(v, arguments[v]);
+					sum += arguments[v];
+				}
+				return sum;
+			}
+			console.log('add函数返回值：', add2(1,2,4,90)); //97
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

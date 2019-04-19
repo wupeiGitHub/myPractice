@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的默写</title>
+		<script>
+			function a(){
+				var i = 0;
+				return function(){
+					i++;
+					alert(i);
+				}
+			}
+			var b = a();
+			b(); //1
+			b(); //2
+			b(); //3
+			
+			
+			//---------------继承
+			//-----------------父类
+			/*function Fn(name){
+				this.name = name || 'fnName';
+				console.log('父类函数被调用了');
+				this.fn01 = function(){
+					alert('fn01函数调用结果：我的名字是'+this.name);
+				}
+			}
+			Fn.prototype.fn02 = function(){
+				alert('fn02函数调用结果是：我的名字是'+this.name);
+			}
+			Fn.prototype.proName = 'proName666'; */
+			
+			//var fn = new Fn();
+			 //fn.fn02();
+			 
+			//---------1.原型链继承
+			//特点：1.把父类的实例当做子类的原型； 
+		 			//2.用起来简单明了。
+		 			//3.实例是子类的实例，也是父类的实例。父类新增原型方法/原型属性，子类都能访问到
+		 	//缺点: 1)创建子类对象时无法给父类构造传参 2)子类不能实现多个父类的继承 3)来自原型上的属性都是被实例共享的
+			/*function Fn2(){};
+				Fn2.prototype = new Fn();
+				//要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
+				Fn2.prototype.name = 'wupei'; 
+			
+			//调用
+			var fn2 = new Fn2(); //无法给父类传参
+			//console.log(fn2);
+			//console.log(fn2.name);
+			alert('子类的默认姓名是：'+(fn2.name));
+			fn2.fn01();
+		 	fn2.fn02();*/
+		 	
+		 	//-------2.借用构造函数实现继承
+		 	//-------优点：解决了原型链的几个缺点。这种模式可以实现传参，解决父类原型属性共享问题， 可以多继承
+		 	//---缺点：1.子类实例并不是父类的实例，只是子类的实例  2.所以子类实例不能访问父类的原型属性或方法
+		 				//3.子类相当于是把所有父类实例代码拷贝了一份，并不是代码的复用，业务复杂情况下胡影响性能。
+		 	/*function Fn3(name){
+		 		alert('Fn3获取的参数值是： '+name);
+		 		Fn.call(this, name);
+		 		//Fn2.call(this, name);
+		 	}
+		 	//--调用
+		 	var fn3 = new Fn3('wupeipei');
+		 	alert("fn3.name==="+fn3.name);
+		 	fn3.fn01();
+		 	//fn3.fn02(); //报错，fn02 不是一个函数 ， 父类的原型属性和方法无法被子类实例共享了*/
+		 	
+			 
+			 //------------组合以上两种方法
+			/*function Fn4(name){
+				Fn.call(this,name);
+			}
+			Fn4.prototype = new Fn(); //原型链继承
+			Fn4.prototype.constructor = Fn4; //把它的构造方法再指回给本身
+		 	//--调用
+		 	var fn4 = new Fn4('wupei6666');
+		 	alert(fn4.name+'       '+fn4.proName);
+			fn4.fn01();
+			fn4.fn02();*/
+		 
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

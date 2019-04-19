@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件委托</title>
+		<style>
+			ul li:nth-child(even){
+				background: blue;
+			}
+			ul li:nth-child(odd){
+				background: red;
+			}
+		</style>
+		<script>
+			window.onload =function(){
+				clickPlease();
+				
+			}
+			
+			//-----------//事件委托方法案例
+			function clickPlease(){
+				var ul = document.getElementsByTagName("ul")[0];
+				//addEventListener 可以和 onclick类似事件共存。 
+				ul.addEventListener('click',function(e){  //e代表当前事件
+		            var e= e || window.event; //window.event支持IE6、7、8
+		            //alert(e.target+' '+ (typeof e.target)); //object
+		            //alert("e.target.nodeType = "+e.target.nodeType); //1
+		            if(e.target.nodeName.toLowerCase()=='li'){
+		                console.log("e.target.innerHTML=", e.target.innerHTML); //222
+		                console.log("e.target.outerHTML=", e.target.outerHTML); // <li>222</li>
+		                e.target.innerText = '我被点过了';
+		            }
+		        },false);
+			}
+		</script>
+	</head>
+	<body>
+		<ul style="width: 300px; height: 200px; background: blanchedalmond;">
+			<li>111</li>
+			<li>222</li>
+			<li>333</li>
+			<li>444</li>
+			<li>555</li>
+		</ul>
+	</body>
+</html>

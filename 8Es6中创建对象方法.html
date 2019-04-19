@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*在es6中，引入了 Class（类）这个概念，作为对象的模板，
+			通过class关键字，可以定义类，
+			基本上，ES6 的class可以看作只是一个语法糖，它的绝大部分功能，ES5 都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已*/
+			
+			class Person {
+				 constructor(name, age) {
+					this.name = name;
+					this.age = age;
+				 }
+				 sayName() {
+					console.log(this.name);
+				 }
+			}
+			var person1 = new Person("Nicholas", 29);
+			person1.sayName(); // Nicholas
+			
+			//上面这个例子其实就是组合构造函数模式和原型模式的改写，
+			//其中，constructor属性直接指向类本身，该方法会默认返回实例对象，
+			//在里面定义的属性和方法都是实例本身具有的方法，不是其它实例共享的，
+			//而像sayName方法就是定义在原型上的方法了，是所有实例一起共享的
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

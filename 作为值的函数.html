@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//对一个数组中存的对象的属性值进行排序的功能
+			function sortType(typeName){ //升序排序
+				return function(obj1, obj2){
+					var value1 = obj1[typeName];
+					var value2 = obj2[typeName];
+					if(value1 < value2){
+						return -1;
+					}else if(value1 > value2){
+						return 1;
+					}else{
+						return 0;
+					}
+				}
+			}
+			
+			var data = [{name:'Zhansan', age: 27}, {name:'Wupei', age: 28}];
+			data.sort(sortType("name")); //调用排序方法
+			console.log('data2 = ', data, '值获取', data[0].name, data[0].age); //Wupei 28
+			data.sort(sortType("age")); //按年龄的值进行排序
+			console.log('data3 = ', data, '值获取', data[0].name, data[0].age); // Zhansan 27
+			
+			
+			//函数a
+			function a(){
+				var i=0;
+				return function(){
+					alert(++i);
+					console.log(i);
+				}
+			}
+			var b = a(); //把a方法的返回值(返回值的也是一个函数)赋值给b
+			b();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

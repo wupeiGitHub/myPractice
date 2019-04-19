@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			
+			//父类方法
+			function Person(name){
+				this.name = name;
+				//console.log("name0-99999999999"); //执行两次
+				this.sum = function(){
+					console.log("name = "+this.name);
+				}
+			}
+			Person.prototype.age = 27; //给够着函数增加原型属性
+			//组合继承（组合原型链继承和借用构造函数继承）
+			//重点：结合了两种模式的优点，传参和复用
+			function Gril(name){
+				Person.call(this,name);
+			}
+			Gril.prototype = new Person();//原型链继承 等价于Gril.prototype.__proto__ = Person.prototype;
+			Gril.prototype.constructor = Gril; //把它的构造方法再指回给本身
+			var gril = new Gril('wupei');
+			console.log(gril.name); //wupei:继承了构造函数的属性 
+			console.log(gril.age); //10: 继承父类的原型属性 
+			console.log(gril.sum()); //10: 继承父类的原型属性  ,undefined
+//　　　　	特点：1、可以继承父类原型上的属性，可以传参，可复用。
+//　　　　　　　	2、每个新实例引入的构造函数属性是私有的。
+//　　　　	缺点：调用了两次父类构造函数（耗内存），子类的构造函数会代替原型上的那个父类构造函数。
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

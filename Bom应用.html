@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>BOM浏览器对象模型</title>
+		<style>
+			*{
+				margin: 0;
+				height: 0;
+			}
+			ul{
+				padding: 0;
+				margin: 10px auto;
+				width: 300px; 
+				height: 200px; 
+				border: 5px solid red; 
+				background: blanchedalmond;
+			}
+			ul li{
+				list-style: inside;
+				width: 200px;
+				height: 20px;
+				/*padding: 10px;*/
+				margin: 0 auto;
+			}
+			ul li:nth-child(even){
+				background: pink;
+			}
+			ul li:nth-child(odd){
+				background: palevioletred;
+			}
+		</style>
+		<script>
+			window.onload =function(){
+				boxInfo();
+				lookInfo();
+				scrollInfo();
+			}
+			
+			//-----------1.获取元素的 尺寸大小
+			function boxInfo(){
+				var ul = document.getElementsByTagName("ul")[0];
+				var widthBorder = ul.offsetWidth; //带边框的宽
+				var width = ul.clientWidth; //不带边框的宽
+				var heightBorder = ul.offsetHeight; //带边框的高
+				var height = ul.clientHeight; //不带边框的高
+				console.log("ul带边框的宽: "+widthBorder);
+				console.log("ul不带边框的宽: "+width);
+				console.log("ul带边框的高: "+heightBorder);
+				console.log("ul不带边框的高: "+height);
+			}
+			
+			//-----------2.获取可视区的大小
+			function lookInfo(){
+				//BOM获取方式
+				var innerHeight = window.innerHeight; //可视区的高
+				var innerWidth = window.innerWidth; //可视区的宽
+				console.log("当前浏览器可视区的高Bom: "+innerHeight);
+				console.log("可视区的宽Bom: "+innerWidth);
+				
+				//DOM获取方式
+				var innerHeight2 = document.documentElement.clientHeight; //可视区的高
+				var innerWidth2 = document.documentElement.clientWidth; //可视区的宽
+				console.log("当前浏览器可视区的高Dom: "+innerHeight2);
+				console.log("可视区的宽Dom: "+innerWidth2);
+			}
+			
+			
+			//-----------3.获取滚动条的距离
+			function scrollInfo(){
+				//BOM获取方式
+				var top = window.pageXOffset; //
+				var left = window.pageYOffset; //
+				console.log("滚动条的X距离: "+top);
+				console.log("滚动条的Y距离: "+left);
+				
+				//DOM获取方式
+				var scrollTop = document.body.scrollTop;  //chrom浏览器
+				var scrollTop2 = document.documentElement.scrollTop; 
+				console.log("scrollTop: "+scrollTop);
+				console.log("scrollTop2: "+scrollTop2);
+				
+				//设置滚动条距离
+				//window.scrollTop(10,20);
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>111</li>
+			<li>222</li>
+			<li>333</li>
+			<li>444</li>
+			<li>555</li>
+		</ul>
+	</body>
+</html>

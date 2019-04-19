@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//------------------------作用域--------------------------------
+//			作用域可以看做是js中一个管理规则,而这个规则基于函数来创建的.
+//			当创建/函数的时候,就会产生一个新的作用域. 会被声明提前(预解析)
+//			注意:当变量和函数声明的名字一样时,函数会覆盖变量的声明;
+//			作用域链: 当访问一个值时,会在当前作用域中去查找,如果没找到就会沿着作用域链继续往外层作用域进行查找.
+		    
+		    //-----------------------数组-----------------------------------
+		    //1.数组创建: 1)字面量 [] 2) new Array()
+		    var arr = [1,2,3];
+		    console.log(arr);
+		    var arr2 = new Array(2); //2表示数组长度，默认值是undefined。这种方式无法使用数组中的遍历方法比如 map,forEach循环
+		    arr2[0] = 1;
+		    arr2[1] = 123;
+		    console.log(arr2, arr2[0]); 
+		   /* arr2.forEach(function(value, index){
+		    	console.log("index value =", index, value);
+		    });*/
+		    //创建一个可以用循环的数组
+		    var arr3 = Array.apply(null,{length:2}).map(function () {
+			      return 3;
+			    });
+		    console.log(arr3); //[3,3]
+		    console.log(arr3); //[3,3]
+		    /*arr3.forEach(function(value, index){
+		    	console.log("index value =", index, value);
+		    });*/
+		   
+		   
+		   
+		    //--------------2.数组的检测
+		    //-方法1：Es5 Object.prototype
+		   var isArr =  (Object.prototype.toString.call(arr3) === '[object Array]');
+		   console.log(Object.prototype.toString.call(arr3)); //[object Array]
+		   console.log("(Object.prototype.toString.call(arr3) === '[object Array]' 返回值：", isArr); //true
+		   //--方法2： Es5 Array.isArray
+		    console.log("Array.isArray(arr3) 返回值：", Array.isArray(arr3)); //true
+		    //--方法3： Es3 instanceOf
+		    console.log(" arr3 instanceof Array  返回值：", arr3 instanceof Array ); //true
+		     //--方法4：indexof
+		    console.log("indexOf 返回值 大于-1表示是数组：", Object.prototype.toString.call(arr3).indexOf('Array') ); //true
+		    
+		    
+		    
+		   //数组中的常用方法： 会改变原来数组的方法有 Es3: push(后追加),pop（后移除）, unshif（前追加）, shif（前删除）, reverse（反转）, sort（排序）
+		   //				 不会改变原数组的方法有Es3: concat(拼接), slice(截取), indexOf ,lastIndexof 
+		   //				会改变原数组： splice(开始位置,删除个数,替换的新值) --- 可以表示删除，插入，替换的效果
+		   //				 Es5:循环方法every, map, filter, some, all, forEach 
+		   				 
+		   				 
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

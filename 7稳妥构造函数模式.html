@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			    //在说这种模式之前，要先说一下稳妥对象，稳妥对象就是指没有公共属性，而且其方法也不引用this的对象，
+			    //稳妥对象最适合在一些安全的环境中，或者防止数据被其他应用程序改动时使用，稳妥构造函数模式遵循与寄生构造函数类似的模式，
+			    //但是还是有下面的不同，第一个是新创建的对象实例方法不引用this，第二个是不使用new操作符调用构造函数
+			    function Person(name, age) {
+				 var o = new Object();
+				 	_name = name;
+				 	_age = age;
+					 o.sayName = function() {
+					 	 return _name;
+					 }
+					 return o;
+				}
+				 
+				var person1 = new Person("Nicholas", 29);
+				person1.sayName(); // Nicholas
+				// 在上面这个例子中，我们在构造函数中创建了一个对象后，可以继续添加一些私有的变量和函数，
+				//要修改这些私有的变量和函数，只能通过创建的对象的方法进行访问，这里在对象上创建的方法其实可以看作就是公有方法，
+				//比如说这里的_name和_age就是私有变量，而对象o的sayName方法就是访问私有变量的公有方法了，这里除了调用sayName()方法外，没有其它方法可以访问其数据成员
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

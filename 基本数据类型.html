@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//--------------------Null和Undefined两种类型的比较
+//			相同点:
+//				1)都只有一个值
+//				2)当它们参与判断时都返回一个值 false
+//				3)都没有方法
+//			不同点:
+//				1)null是关键字, undefined不是关键字
+//				2)null是一个特殊空对象, undefined是一种数据类型,是window对象下的属性
+//				3)null代表已经初始化了,undefined表示未初始化
+//				4)用typeof检查类型返回值不同， null返回number， undefined返回还是undefined
+
+				
+				//----------使用建议
+				//1.不要在赋值时Undefined而用null
+				//2.判断某个值是否存在是否为空时 == null
+				//3.明确是undefined或NaN其中一个值是用全等 === 判断
+			
+			console.log("typeof null返回值：", typeof null); //object 对象
+			console.log("typeof undefined返回值：", typeof undefined); //undefined
+			
+			console.log("Number(null)返回值：", Number(null)); //0
+			console.log("Number(undefined)返回值：", Number(undefined)); //NaN
+			
+			console.log("typeof NaN返回值：", typeof NaN); //number
+			console.log("Number(NaN)返回值：", Number(NaN)); //NaN
+			//----------------boolean: 主要用来判断或者结果比较，所有数据类型都可以被转换为boolean类型
+			//只有undefined, null, 0, -0, NaN, '' 共6个值会被转换为false, 其他数据都会被转换为true
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//------------------案例2==========================
+			var a =  'abc';
+	        a.len = 4;
+	        console.log("a.len = ", a.len); //undefined, 基础数据类型不能设置属性，她是无效状态
+	        a.toUpperCase(); //运行后不会把大写字母赋值给a,而是立即被释放了
+	        console.log("a.toUpperCase = ", a); //abc
+	        //console.log(a = a.toUpperCase()); //重新赋值
+	        //js中任何两个独立的对象都是不相等的
+	        //------------------案例2==========================
+	        var a = true;
+	        var b = true;
+	        //typeof a == b  >>> (typeof a) == b >>> 'boolean' == true >>>  'boolean' == 1 >>> NaN == 1
+	        //NaN在==恒等比较时，只要两边出现一个NaN就返回false
+	        console.log(" typeof a :", typeof a); //boolean
+	        console.log(" Number('boolean') :", Number('boolean')); //NaN
+	        console.log(" typeof a == b :", typeof a == b); //false 
+	        
+		</script>
+	</head>
+	<body>
+			
+	</body>
+</html>

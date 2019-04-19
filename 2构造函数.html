@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//构造函数： 也是一个函数，只不过调用的时候需要实例化new方式来去调用
+			//作用：构造函数主要用于初始化对象，减少代码量
+//			构造函数和普通函数的区别
+//			相同点: 定义/创建的方式基本相同,用function定义.但是构造函数习惯用大写字母开头
+//			不同点: 
+//					1.调用的方式不一样:构造函数需要实例化,new一个方法名, 而普通函数直接用方法名()就可以调用.
+//					2.构造函数的执行方式不同:
+//					构造函数a.它会在堆内存中创建一个新的对象
+//							b.将新建的对象设置为函数中的this
+//							c.再逐个执行函数中的代码
+//							d.将新建的对象作为返回值
+//					3.返回值不同.普通函数如果没有return返回值,直接用typeof 返回函数时 就会返回一个undefined,而构造函数返回的是object
+//					4.属性访问不同:
+//					   构造函数里的属性通过this.属性名并赋值后,那么实例化方法后就能直接用点属性名来获取属性值,而普通函数不可以
+
+			function fn(name, age, sex){
+				console.log('我是一个普通函数');
+				console.log(name, age , sex);
+			}
+			var a = fn('wupei',27,'女'); //调用
+			//console.log(a.name, a.age, a.sex); //不能直接访问属性,会报错
+			console.log( typeof a); //undefined
+			
+			function fn2(name, age, sex){
+				console.log('我是一个构造函数');
+				this.name = name; //公有属性,在对象实例化后调用
+				this.age = age;
+				this.sex = sex;
+				//console.log(name, age , sex);
+			}
+			var b = new fn2('wupei',27,'女');
+			console.log(b.name, b.age, b.sex); //wupei 27 女
+			console.log(typeof b);
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
