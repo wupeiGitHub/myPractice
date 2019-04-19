@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>iconfont图片应用</title>
+		<link type="text/css" rel="stylesheet" href="iconFont/iconfont.css" />
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 100%;
+			}
+			header{
+				width: 80%;
+				height: 120px;
+				background: paleturquoise;
+				margin: 10px auto 0;
+			}
+			ul{
+				width: 99%;
+				height: 80%;
+				background: deepskyblue;
+				margin: 10px auto;
+			}
+			ul li{
+				list-style: none;
+				float: left;
+				padding: 40px 69px;
+				text-align: center;
+				line-height: 100%;
+				cursor: pointer;
+				border-right: 1px dashed gray;
+			}
+			li i:hover{
+				font-size: 24px;
+			}
+			ul li span:first-child{
+				color: mediumvioletred;
+			}
+			ul li a{
+				text-decoration: none;
+			}
+			/*ul li a:link{
+				color: yellow;
+			}*/
+			ul li a:visited{ 
+				color: blueviolet;
+			}
+			ul li a:hover{
+				color: blue;
+			}
+			/*ul li a:active{
+				color: pink;
+			}*/
+			article{
+				box-sizing: border-box;
+				width: 80%;
+				height: 300px;
+				background: #0086B3;
+				margin: 0 auto;
+				padding: 110px 0;
+			}
+			article > section{
+				margin: 0 auto;
+				width: 400px;
+				height: 90px;
+				background: gray;
+				text-align: center;
+				line-height: 90px;
+			}
+			input[type]{
+				height: 40px;
+				border: 1px dashed red;
+			}
+			input[type="text"]{
+				background: pink;
+			}
+			input[type="submit"]{
+				background: greenyellow;
+				width: 80px;
+			}
+			article section{
+				display: none;
+			}
+			/*article section:first-child{
+				display: block;
+			}*/
+			:target{
+				display: block;
+				background: lightblue;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<ul>
+				<li><a href="#d1"><i class="iconfont">&#xe617;</i> 列表1 </a></li>
+				<li><a href="#d2"><i class="iconfont">&#xe619;</i> 列表2 </a></li>
+				<li><a href="#d3"><i class="iconfont">&#xe61a;</i> 列表3 </a></li>
+				<li><span class="iconfont">&#xe61b;</span> 列表4 </li>
+				<li><span class="iconfont">&#xe621;</span> 列表5 </li>
+			</ul>
+		</header>
+		<article>
+			<section id="d1">
+				<input type="text" />
+				<input type="submit" />
+			</section>
+			<section id="d2">
+				test 22222222222
+			</section>
+			<section id="d3">
+				test 3333333333333333
+			</section>
+		</article>
+	</body>
+</html>

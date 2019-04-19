@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>2D+3D效果案例</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#div{
+				position: relative;
+				background: black;
+				border: 1px dotted blue;
+				margin: 0px auto;
+				width: 300px;
+				height: 300px;
+				margin:120px auto;
+			}
+			.box1,.box2,.box3,.box4,.box5{
+				width: 100px;
+				height: 100px;
+				background: pink;
+				transform-origin: left top;
+				border: 1px solid blue;
+				margin: 0px auto;
+				transition: all 2s;
+				position: absolute;
+				top: 100px;
+				left: 100px;
+			}
+			.box1{
+			}
+			.box1:hover{
+				transform: rotate(30deg);
+			}
+			.box2:hover{
+				transform: rotate(60deg);
+			}
+			.box3:hover{
+				transform: rotate(90deg);
+			}
+			.box4:hover{
+				transform: rotate(120deg);
+			}
+			.box5:hover{
+				transform: rotate(150deg);
+			}
+			#div div+div {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div">
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>html5本地存储</title>
+	</head>
+	<body>
+		<div id="result">
+			
+		</div>
+		<script>
+			//检查是否支持本地存储
+			console.log(window.localStorage); //Storage对象
+			if(window.localStorage){
+			 	alert('This browser supports localStorage');
+			}else{
+			 	alert('This browser does NOT support localStorage');
+			}
+
+			/*if(Storage !== "undefined"){ //if(typeof (Storage !== "undefined")){
+				localStorage.siteName = "Test";
+				//document.getElementById("result").textContent=localStorage.siteName;
+				document.getElementById("result").innerText=localStorage.siteName;
+			}else{
+				alert('您的浏览器不支持本地存储，需要升级！');
+			}*/
+			
+			//---------cookie存储
+			document.cookie = 'name2=wupei2';
+			console.log("cookie = ",document.cookie);
+			localStorage.setItem("name1","wupei1"); //cookie =  name=wupei2
+			
+			//let data = localStorage.getItem("name"); 
+			//console.log(data); //wupei1
+			
+			
+			/*localStorage.a = 3;//设置a为"3"
+			localStorage["a"] = "sfsf";//设置a为"sfsf"，覆盖上面的值
+			localStorage.setItem("b","isaac");//设置b为"isaac"
+			var a1 = localStorage["a"];//获取a的值
+			var a2 = localStorage.a;//获取a的值
+			var b = localStorage.getItem("b");//获取b的值
+			console.log(a1, a2, b);*/
+			localStorage.removeItem("name1");//清除c的值
+		</script>
+	</body>
+</html>

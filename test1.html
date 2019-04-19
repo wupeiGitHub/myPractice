@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>巩固练习的部分</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0px;
+			}
+			.clearFlex:after{
+				display: block;
+				content: '';
+				clear: both;
+			}
+			body *{
+				margin: 5px;
+				text-align: center;
+			}
+			header,nav,footer,section,aside{
+				border: 1px solid red;
+			}
+			/*给头尾设置通用样式*/
+			header,nav,footer{
+				width: 99%;
+				height: 80px;
+			}
+			.s_middel{
+				width: 99%;
+				height: 400px;
+			}
+			/*给中间内容设置通用样式*/
+			article,aside{
+				width: 48%;
+				height: 390px;
+			}
+			article{
+				float: left;
+				border-style: none;
+				margin-left: 0;
+			}
+			aside{
+				float: right;
+			}
+			article section{
+				margin-top: 0px;
+				height: 190px;
+				width: 100%;
+			}
+			
+			.s_middel section ul{
+				width: 100%;
+				padding-left: 30px;
+				list-style: none; /*li前的点样式取消掉*/
+			}
+			.s_middel section ul li{
+				float: left;
+				height: 50px;
+				width: 100px;
+				background: burlywood;
+			}
+			
+			/* li:nth-last-of-type(1) == li:last-of-type == li:last-child*/
+			.s_middel section ul li:last-child{
+				background: pink;
+			}
+			
+			.s_middel article .sect_top p:first-of-type{
+				border: 1px solid blue;
+				margin-top:10px;
+				width: 250px;
+				height: 50px;
+				background:#5F9EA0;
+				font: 14px/25px '微软雅黑';
+				overflow: hidden;   /*第1个文字属性值设置*/
+				/*设置文字溢出后显示的样式方式 text-overflow 和 white-space: nowrap; 结合*/
+				text-overflow: ellipsis; /*第2个文字属性值设置*/
+				/*设置如何处理元素内的空白。
+				 * normal	默认。空白换行会被浏览器忽略。
+				 * pre	空白会被浏览器保留。其行为方式类似 HTML 中的 <pre> 标签。
+				 * nowrap 文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。
+				 * pre-wrap	保留空白符序列，但是正常地进行换行。
+				 * pre-line	合并空白符序列，但是保留换行符。
+				 * inherit	规定应该从父元素继承 white-space 属性的值。
+				 * */
+				white-space: nowrap; /*第3个文字属性值设置； 这3个都设置了 文本内容就会显示在一行中不换行且多余容器内容会隐藏用...代替*/
+				
+				text-indent:2em;   /*文字开头的空白宽度px或者字体数量2em代表2个字的位置意*/
+				word-break: break-word;
+				/*word-spacing: 10px; 改变字（英文单词）之间的标准间隔*/
+				text-transform: capitalize; /*capitalize：文本中的每个英文单词以大写字母开头。*/
+				
+			}
+		</style>
+	</head>
+	<body>
+		<header>header</header>
+		<nav>nav</nav>
+		<section class="s_middel clearFlex">
+			<article>
+				<section class="sect_top">
+					<ul class="clearFlex">
+						<li>li1</li>
+						<li>li2</li>
+						<li>li3</li>
+						<li>li4</li>
+						<li>li5</li>
+					</ul>
+					<p>测试文字溢出，少wupei is a girl 时诵诗书少时 诵诗 书所所所所所
+						所所所所所所所所所所所所所所是的法师打发打发变电房嘎都是士大
+						夫撒打发斯蒂芬斯蒂芬打发斯蒂芬少时诵诗书所所所所所所所所所所所所所所所所所</p>
+				</section>
+				<section>section2</section>
+			</article>
+			<aside>aside</aside>
+		</section>
+		<footer>footer</footer>
+	</body>
+</html>

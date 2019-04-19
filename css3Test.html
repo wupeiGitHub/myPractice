@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Css特效应用</title>
+		<style type="text/css">
+			body{
+				background: black;
+			}
+			.clearfix:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.tab{
+				width: 100%;
+				border:0;
+			}
+			#tab1,#tab2,#tab3{
+				border: 3px solid yellow;
+			}
+			.tab #tab1,#tab2{
+				width: 300px;
+				height: 310px;
+				float: left;
+			}
+			/*#tab1：第一行第一列内容*/
+			.tab #tab1{
+				margin-left: 160px;
+				overflow: hidden;
+			}
+			.tab #tab1 div{
+				/*宽度是图片的宽度乘以图片数量 1500 = 300的宽*5张 */
+				width: 1500px;  
+				animation:5s tab1Move ease infinite;
+			}
+			.tab #tab1 div img{
+				border-style: none;
+				float: left;
+				width: 300px;
+				height: 310px;
+			}
+			@keyframes tab1Move{
+				0%,10%{
+			        margin-left: 0;
+			    }
+				20%,30%{
+			        margin-left: -300px;
+			    }
+			    40%,50%{
+			        margin-left: -600px;
+			    }
+			    60%,70% {
+			        margin-left: -900px;
+			    }
+			    80%,100% {
+			        margin-left: -1200px;
+			    }
+			}
+			/*鼠标放上去时停止动画*/
+			#tab1:hover div{
+				animation-play-state: paused;
+			}
+			
+			/*tab2*/
+			.tab #tab2{
+				margin-left: 290px;
+				position: relative;
+				perspective: 400px;
+				transition: 1s;
+				background:cadetblue;
+			}
+			/*tab2 -四方体旋转效果*/
+			@keyframes rotate {
+			    100% {
+			        transform: rotateX(90deg) rotateY(360deg);
+			    }
+			}
+			#fourBox{
+				/*启动动画的方式*/
+				animation:5s rotate linear infinite normal running;
+			    height: 310px;
+			    width: 300px;
+			    position: relative;
+			    transform-style: preserve-3d;
+			}
+			#fourBox .face{
+				width: 90px;
+				height: 90px;
+				border: 1px solid cyan;
+				color: #ffffff;
+				font-size: 26px;
+				background-color: rgba(152,251,152,0.6);
+				position: absolute;
+				top: 100px;
+				left: 90px;
+				margin: 0px;
+				text-align: center;
+				line-height: 90px;
+				box-shadow:1px 1px 60px 4px rgba(0,255,255,0.5);
+			}
+			.top{
+				transform: rotateX(90deg) translateZ(45px);
+			}
+			.front{
+				transform: translateZ(45px);
+			}
+			.left{
+				transform: rotateY(-90deg) translateZ(45px);
+			}
+			.right{
+				transform: rotateY(90deg) translateZ(45px);
+			}
+			.back{
+				transform: rotateX(180deg) translateZ(45px);
+			}
+			.bottom{
+				transform: rotateX(-90deg) translateZ(45px);
+			}
+			#fourBox:hover{
+				animation-play-state: paused;
+			}
+			
+			/*tab3*/
+			#tab3{
+				width: 900px;
+				height: 280px;
+				margin: 10px 0 0 160px;
+				overflow: hidden;
+			}
+			#photos{
+				/*width: 图片宽度乘以图片数量 ; 1800=300*7 */
+				width: 1800px;
+				height: 280px;
+				border-style: none;
+				animation: 5s tab3Move linear infinite;
+			}
+			#tab3 img{
+				width: 300px;
+				height: 280px;
+				float: left;
+			}
+			@keyframes tab3Move{
+				/*from{
+					margin-left: 0px;
+				}
+				to{
+					margin-left: -900px;
+				}*/
+				0%{
+			        margin-left: 0;
+			    }
+			    100%{
+			    	/* 最多移动边距是显示图片photos的div的宽度*/
+			       margin-left: -900px;
+			    }
+			}
+			#photos:hover{
+				animation-play-state: paused;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="tab clearfix">
+			<!--
+            	作者：wupei_zlzp@sina.com
+            	时间：2019-03-22
+            	描述： 轮播显示一张图片
+            -->
+		    <div id="tab1">
+	    		<div class="clearfix">
+	    			<img src="../img/mayun01.jpg" src="mayun01" />
+	    			<img src="../img/mayun02.jpg" src="mayun02"/>
+	    			<img src="../img/mayun03.jpg" src="mayun03"/>
+	    			<img src="../img/lqd01.jpg" src="lqd01"/>
+	    			<img src="../img/lqd02.jpg" src="lqd02"/>
+	    		</div>
+		    </div>
+		    <!--
+            	作者：wupei_zlzp@sina.com
+            	时间：2019-03-22
+            	描述： 四方体立体旋转效果
+            -->
+		    <div id="tab2">
+		    	<div id="fourBox">
+		    		<div class="face front"> 前 </div><!--前-->
+		    		<div class="face back"> 后 </div>
+		    		<div class="face left"> 左 </div>
+		    		<div class="face right"> 右 </div>
+		    		<div class="face top"> 上 </div>
+		    		<div class="face bottom"> 下 </div>
+		    	</div>
+		    </div>
+	    </div>
+	    <!--
+            	作者：wupei_zlzp@sina.com
+            	时间：2019-03-22
+            	描述： 轮播显示一行图片
+            -->
+	    <div id="tab3">
+	     	<div id="photos">
+	     		<img src="../img/lqd01.jpg" src="lqd01"/>
+    			<img src="../img/lqd02.jpg" src="lqd02"/>
+    			<img src="../img/lqd03.jpg" src="lqd03"/>
+    			<img src="../img/mayun01.jpg" src="mayun01"/>
+    			<img src="../img/mayun02.jpg" src="mayun02"/>
+    			<img src="../img/mayun03.jpg" src="mayun03"/>
+    		</div>
+	     </div>
+	</body>
+</html>
