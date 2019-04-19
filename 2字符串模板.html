@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串模板应用</title>
+		<script>
+			//1.-----------------------------------------`` 字符串模板应用
+			let name = 'wupei';
+			let age = 20;
+			//原始写法，拼接字符串用+号
+			let str = '我叫'+name+'年龄：'+age;
+			console.log(str); //我叫wupei年龄：20
+			
+			//-----Es6中用 ${变量名} 可以直接放到字符串里也可以拿到变量值
+			//类似java里的struts2的EL表达式写法
+			let str2 = '我叫${name}年龄：${age}';
+			console.log(str); //我叫wupei年龄：20
+			
+			
+			//2-----------------------循环给li赋值---------------
+			function cretLi(){
+				let data = [
+					{title: "标题--------------------1", num : 100},
+					{title: "标题--------------------2", num : 200},
+					{title: "标题--------------------3", num : 300},
+					{title: "标题--------------------4", num : 400},
+					{title: "标题--------------------5", num : 100},
+					{title: "标题--------------------6", num : 600},
+					{title: "标题--------------------7", num : 100},
+					{title: "标题--------------------8", num : 800}
+				];
+				
+				//原始写法
+				/*
+				let ulNode =  document.querySelector("#ul");
+				for(let i=0; i<data.length; i++){
+					var li= document.createElement("li");
+					li.innerHTML = '<span>标题：'+data[i].title+'</span>'
+									+'<span> 阅读人数：'+data[i].num+'</span> ';
+					ulNode.appendChild(li);
+				}*/
+				
+				//--------``字符串模板+解构后 后
+				//------``字符串模板优点： 可以随意换行 ，可以使用${变量}
+				let ulNode =  document.querySelector("#ul");
+				for(let i=0; i<data.length; i++){
+					var li= document.createElement("li");
+					li.innerHTML = `<span>标题：${data[i].title}</span>
+									<span> 阅读人数：${data[i].num}</span> `;
+					ulNode.appendChild(li);
+				}
+				
+				
+			}
+			
+			
+			window.onload = function(){
+				cretLi();
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="ul">
+			<!--<li> 6666666666666 </li>-->
+		</ul>
+	</body>
+</html>

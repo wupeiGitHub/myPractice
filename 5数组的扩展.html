@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			let arr = [1, 4, 5, 7, 8];
+			
+			//------------find: 找出第一个符合条件的数组成员。返回满足回调函数条件的第一个值，没有找到返回undefined
+			var a = arr.find((items)=>{
+				return items>4;
+			});
+			console.log(a); //5
+			/*var a = [1,5,15,20,25].find((value,index,arr) =>{
+			    return value > 20;
+			});
+			
+			console.log(a);*/
+			//--------------findIndex： 找出满足回调函数return条件的第一个数组里的值的索引
+			var a1b = arr.findIndex((items)=>{
+				return items>7;
+			});
+			console.log(a1b); //4
+
+			
+			//---------Array.from： 把一个类数组（伪数组）转化为数组
+			function fn(){
+				console.log("arguments:", arguments);
+				console.log("type:", typeof arguments); //object
+				console.log("type:", arguments instanceof Array); //false
+				console.log([...arguments]); //[1, 4, 5, 666, 66]
+				console.log(Array.from(arguments)); //[1, 4, 5, 666, 66]
+			}
+			fn(1,4,5,666,66);
+			
+			//-------Array.of : 把一组值，转为数组
+			console.log("Array.of:", Array.of(1,2,4,6));
+			
+			//--------fill(填充内容， 开始下标，结束下标) 填充方法
+			console.log(['q','b','c'].fill('fff',1,2)); // ["q", "fff", "c"]
+			console.log(['q','b','c'].fill('fff',1)); // ["q", "fff", "fff"]
+			console.log(['q','b','c'].fill()); //[undefined, undefined, undefined]
+			console.log(['q','b','c'].fill('')); // ["", "", ""]
+			
+			//------------includes包含方法
+			console.log('includes查找是否包含某个值：', ['q','b','c'].includes('b')); // true
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

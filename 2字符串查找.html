@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串查找应用</title>
+		<script>
+			//用includes 代替原来的indexOf
+			let str = 'apple wupei sssd 666666';
+			console.log("includes 应用：", str.includes('wupei')); //true
+			
+			//案例
+			function checkIe(){
+				//navigator.userAgent获取浏览器用户信息：
+				// 火狐返回值：Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0
+				// 谷歌返回值：//Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36
+				console.log(navigator.userAgent); 
+				if(navigator.userAgent.includes('Chrome')){
+					alert('是谷歌浏览器');
+				}else{
+					alert('不是谷歌浏览器');
+				}
+			};
+			
+			//-------------字符串以什么开始什么结尾
+			let str1 = 'http://234333333333333.com';
+			console.log("stratWith：", str1.startsWith('http')); //true
+			console.log("endsWith：", str1.endsWith('.com')); //true
+			
+			//------------Es2017 字符串重复操作
+			let str2 = 'wupei ';
+			console.log("repeat：", str2.repeat(5)); //wupei wupei wupei wupei wupei 
+			
+			//------------Es2018 填充字符串： 
+			//-------str.padStart(整个字符串长度，从前填充东西)
+			//-------str.padEnd(整个字符串长度，从后面填充东西)
+			let str3 = 'wupei', padStr = ' Test';
+			console.log("padStart：", str2.padStart(str3.length+padStr.length ,padStr)); //Testwupei 
+			console.log("padEnd：", str2.padEnd(str3.length+padStr.length ,padStr)); //wupeiTest
+			
+			
+			window.onload = function(){
+				checkIe();
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<ul id="ul">
+			<!--<li> 6666666666666 </li>-->
+		</ul>
+	</body>
+</html>

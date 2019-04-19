@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//-------------箭头函数写法
+			// 语法：(参数1,参数2) => {表达式 retrun返回值} 
+			// 当参数值有一个时（）可以省略， 当{}内容只有一句时{}也可以省略
+			// 注意：1） 箭头函数中的this执行的不是执行的正常的执行函数的作用域，而是执行的定义的箭头函数的那个对象
+				  //2) 箭头函数中 arguments是无效的;可以用...代替
+				  //3) 箭头函数不能当做构造函数使用
+				  
+				  
+			//------------原始写法
+			/*function show2(a,b){
+				console.log(a, b);//1 2
+				return a+b;
+			}
+			let a = show2(1,2); 
+			console.log(a); //3*/
+			
+			//-------------案例1
+			let a1 = (a=0,b=0) => {return a+b};; 
+			console.log(a1()); //0
+			console.log(a1(1,3)); //4
+			
+			//---------------案例2
+			let show1 =(a=0,b=0) => {
+				console.log('我被调用了a =',a, 'b = ', b);
+				console.log('this :',  this); //Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+				return a+b
+			};
+			show1(1,9);
+			
+			//----------案例3
+						//---------------案例2
+			let show3 =(...values) => {
+				//console.log('arguments : ',  arguments); // arguments is not defined
+				console.log('values :',  values);  // [1, 9, 545]
+			};
+			show3(1,9,545);
+			
+			//-----------案例4
+			/*function Show4(){
+				this.name = 'abc';
+			}
+			let s = new Show4();
+			console.log(s.name); //abc */
+			
+			/*let Show4 =() =>{
+				this.name = 'abc';
+			}
+			let s = new Show4();
+			console.log(s.name); //报错： Show4 is not a constructor*/
+			
+			//------------Es2017,中函数参数传参中最后一个参数可以支持,
+			function show5(a,b,){
+				console.log(a, b); //1,2
+			}
+			show5(1,2,); 
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

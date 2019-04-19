@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Es6的解构赋值</title>
+	<script>
+		//---------------普通变量------的解构赋值--------------------
+		//let aa = 1, bb = 2, cc= 3;
+		//console.log(aa, bb , cc); //1 2 3
+		//解构赋值方式如下：
+		let [aa,bb,cc] = [1,2,3]; 
+		console.log(aa, bb , cc); //1 2 3
+		
+		//------------------平常的写法-案例
+		let arr = [12, 3, 6, 9];
+		console.log(arr[0], arr[1], arr[2]); //12 3 6
+		
+		//解构赋值：左右两边结构要保持一致, 否则会默认给undefined
+		//-------------------------解构赋值的案例： 给数组解构赋值
+		let [a, b, c] = [1, 2, 3];
+		console.log(a, b , c); //1 2 3
+		
+		let [a1, [b1, c1]] = [1, [2, 3]];
+		console.log(a1, b1 , c1); //1 2 3
+		
+		let [a2, b2, c2] = [1, [2, 3]];
+		console.log(a2, b2 , c2); //1  [2, 3]  undefined
+		
+		let [a3, b3, c3] = [1, [2, 3], ['a','b']];
+		console.log(a3, b3 , c3); //1  [2, 3]  ["a", "b"]
+		
+		//-------------=---------------给json对象解构赋值----
+		let js1 = {
+			name : 'wupei',
+			age : 28,
+			job : '码农'
+		}
+		//--普通获取方式如下：
+		console.log(js1.name, js1.age , js1.job); //wupei 28 码农
+		//对象解构赋值时用大括号：{key1， key2, key3.....}  key对应是json中的key, 但是可以起别名 用key: 别名
+		let {name, age, job: jb } = js1; 
+		console.log(name, age , jb); //wupei 28 码农
+		
+		
+		//------------解构赋值还可以给默认值， 变量='默认值'
+		//let [bb1, bb2, bb3='无'] = [1, 2];
+		//console.log(bb1, bb2, bb3); //1 2 "无"
+		
+		//let [bb1, bb2, bb3='无'] = [1, 2, undefined];
+		//console.log(bb1, bb2, bb3); //1 2 "无" 
+		
+		let [bb1, bb2, bb3='无'] = [1, 2, null];
+		console.log(bb1, bb2, bb3); //1 2 null : 注意null算一个空的对象object
+		
+		
+		//--------- 解构进行交换位置
+		let t1 = 1, t2 = 2, t3 = 3;
+		console.log("交互位置前t1, t2, t3 的值", t1, t2, t3);
+		[t1, t2, t3] = [t3, t1, t2];
+		console.log("交互位置后t1, t2, t3 的值", t1, t2, t3);
+		
+		//----------注意对象的解构赋值问题：
+		//如果前面已经定义了引用变量，后面不需要再定义变量，但是{}会被单独当做一个作用域块进行解析还是会报错，所以可以再外面加一个小括号
+		function getfn(){
+			return {
+				left: 10,
+				top2 : 20
+			}
+		}
+		let {left, top2} = getfn();  //等价于 ({left, top2} = getfn());
+		console.log(left , top2 ); // 10， 20
+		
+		
+		//---------------------函数传参解构
+		/*function show({a,b}){
+			console.log(a,b); //1,2
+		}
+		show({a:1, b:2});*/
+		
+		function show({a,b='wupei'}){
+			console.log(a,b); //1 "wupei"
+		}
+		show({a:1});
+		
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

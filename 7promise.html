@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>promise承诺，许诺</title>
+		<script>
+			//---------代替以前的回调函数和事件
+			//-----语法：
+			/*new Promise(function(resolve, reject){
+				resolve成功操作
+				reject失败的操作
+			});*/
+			let a = 1;
+			let promise = new Promise(function(resolve, reject){
+				//resolve : 成功的时候调用
+				//reject ： 失败的时候调用
+				if(a == 10){
+					resolve('成功');
+				}else{
+					reject('失败');
+				}
+			});
+			//
+			promise.then(res=>{
+				console.log(res);
+			}, err=>{
+				console.log(err);
+			});
+			
+			//------异常处理
+			promise.catch(err=>{
+				console.log(err);
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

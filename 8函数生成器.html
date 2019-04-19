@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>函数生成器的实例</title>
+	</head>
+	<body>
+		<script>
+			//语法:JS函数生成器，function* () {}
+			/**
+			 * 　　 1、函数生成器特点是函数名前面有一个‘*’
+				　　2、通过调用函数生成一个控制器
+				　　3、调用next()方法开始执行函数
+				　　4、遇到yield函数将暂停
+				　　5、再次调用next()继续执行函数
+			 */
+			//------------简单的案例
+			function * fns(){
+				console.log('start1----------');
+				yield console.log('111111');
+				console.log('start2----------');
+				yield console.log('222');
+				yield console.log('3333');
+				yield console.log('4444');
+				yield console.log('5555');
+				console.log('end----------');
+			}
+			/* var a = fns();
+			console.log(a.next()); //111,{value: undefined, done: false}
+			console.log(a.next()); //222,{value: undefined, done: false}
+			console.log(a.next());
+			console.log(a.next());
+			console.log(a.next());
+			console.log(a.next()); //{value: undefined, done: true} */
+			
+			//--------------函数生成器-传值方法应用(消息传递)
+			function * fn2(){
+				var name = yield 'wupei';
+				console.log("----1：", name);
+				yield;
+				console.log("----2： ",name);
+			}
+			var obj= fn2();
+			var a1 = obj.next();
+				console.log(a1);//{value: "wupei", done: false}
+				console.log(a1.value); //wupei
+			/* var a2 = obj.next();
+				console.log(a2); //{value: undefined, done: false}
+				console.log(a2.value); //undefined */
+				obj.next(123); //传递参数给下一个调用者
+				obj.next(); //123
+		</script>
+	</body>
+</html>

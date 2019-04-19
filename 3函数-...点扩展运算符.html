@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>...扩展还原操作，剩余参数使用</title>
+		<script>
+			//-------------新写法1
+			let arr = ['aaa','bbb','cccc'];
+			console.log("原数组arr：", arr);  //["aaa", "bbb", "cccc"]
+			console.log("原数组用点展开：", ...arr); // aaa bbb cccc
+			
+			//一般应用于函数中的未知个数的参数
+			//参数是：1,3,4,5,6,7 序列 经过 ...后 转换为 数组[1,3,4,5,6,7]
+			function show(a){
+				console.log("a:", a); //1
+			}
+			show(1,3,4,5,6,7);
+			
+			function show2(...a){
+				console.log("a转为数组1:", Array.from(a)); //[166, 3, 4, 5, 6, 7]
+				console.log("a转为数组2:", a); //[166, 3, 4, 5, 6, 7]
+				//排序：
+				console.log(a.sort((a,b)=>{return a-b})); //[0, 3, 4, 5, 6, 7, 166]
+			}
+			show2(0,166,3,4,5,6,7);
+			
+			//剩余参数
+			function show4(a, b, ...c){
+				console.log("a:", a);  //0
+				console.log("b:", b);  //166
+				console.log("c:", c); //[3, 4, 5, 6, 7]
+			}
+			show4(0,166,3,4,5,6,7);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//------------原始写法
+			/*function show(a, b){
+				b = b || '默认a';
+				b = b || '默认b';
+				console.log(a, b);
+			}
+			//show('a','b');
+			show('a'); //a 默认a
+			//show(undefined,'b');*/
+			
+			//-------------新写法1
+			function show2(a='a', b='b'){
+				console.log(a, b);
+			}
+			show2('a1'); //a1 b
+			show2(); //a b
+			
+			//-----------新写法2：默认值和解构结合， 参数是一个对象
+			function show3({x=0, y=0}={}){
+				console.log(x, y);
+			}
+			 //如果show3没有给对象默认值{}空对象直接调用函数不传参数会报错：Cannot destructure property `x` of 'undefined' or 'null'.
+			show3(); //0 0 默认值
+			show3({x: 20, y: 10});  //20 10
+			
+			
+			//-----注意：函数中的形参里面的变量是默认定义过的，不能再用let重复定义
+			/*function show4(a= 18){
+				let a = 1; //会报错，a已经定义  Identifier 'a' has already been declared
+			}
+			show4();*/
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
