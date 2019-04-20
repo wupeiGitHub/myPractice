@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>vuetest1</title>
+    <script>
+    	window.onload = function(){
+    		var a= 10;
+    		function f1(){
+    			console.log('a: ',a); //undefined
+    			var b = 2*a;
+    			var a=20;
+    			var c= a+1;
+    			console.log(b); //NaN
+    			console.log(c); //21
+    		}
+    		f1();
+    		console.log('a=',a);
+    	}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

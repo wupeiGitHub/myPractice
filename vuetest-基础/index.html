@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="div-vue">
+			    <p><span v-text="age"></span> <span v-html="name"></span></p><!--解决 {{name}} 写法的闪烁问题-->
+				<p>1.固定写法拿到data中的属性值 name :  {{name}}, age : <span class="span">{{age}}</span> </p>
+				<p>2.我拿到的方法： {{helloFn()}}</p><!--{{属性访问写属性名，如果是方法需要写小括号}}-->
+				<a v-bind:href="website">百度一下</a>
+				<input type="text" v-bind:value="job" />
+				<p v-html="websiteTag"></p>
+				<p>--------------------事件应用----------------------<p>
+				<button type="button" v-on:click.once="add">加一岁</button>
+				<button type="button" @click="subtract">减一岁</button>
+				<button type="button" v-on:dblclick="add2(3)">双击加一岁</button>
+				<button type="button" @dblclick="subtract2(3)">双击减一岁</button>
+				
+				<p>--------------------事件应用----------------------<p>
+				<div id="canvas" v-on:mousemove="changeXY">
+					x : {{x}}  y: {{y}}
+				</div>
+		</div>
+		<script src="./js/vue.js"></script>
+	</body>
+</html>

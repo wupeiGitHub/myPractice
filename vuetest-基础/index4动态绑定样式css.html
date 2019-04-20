@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试-双向数据绑定方法</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<style>
+			.box{
+				border: 1px solid #0000FF;
+				color: red;
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				line-height: 100px;
+			}
+			.changeColor{
+				color: white;
+				background: #87CEEB;
+			}
+			.changeLen{
+				width: 120px;
+				height: 130px;
+				border: 1px dotted blueviolet;
+			}
+			.btn{
+				color: mediumvioletred;
+			}
+			.red{
+				color: red;
+			}
+			.blue{
+				color: blue;
+			}
+		</style>
+		<div id="div-vue4">
+			<h1 v-bind:class="{red:true, blue:false}">动态改变class</h1>
+			<button v-bind:class="btn" v-on:click="changeColor = !changeColor"> 点击改变颜色</button>
+			<button v-bind:class="btn" v-on:click="changeLen = !changeLen"> 点击改变长度</button>
+			<div class="box" v-bind:class="{changeColor:changeColor,changeLen:changeLen}">
+				我的内容
+			</div>
+			<div v-bind:class="extandsUpCalss">
+				内容666666666
+			</div>
+		</div>
+		<script>
+			new Vue({
+				el:'#div-vue4',
+				data:{
+					btn: 'btn',
+					changeColor: false, //默认不显示
+					changeLen : false
+				},
+				computed:{
+					extandsUpCalss(){
+						return {
+							changeColor:this.changeColor,
+							changeLen:this.changeLen,
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

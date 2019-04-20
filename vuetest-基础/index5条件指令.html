@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试-条件指令v-if</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			p{
+				width:200px; height: 100px; border: 1px solid red ;
+				background: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div-vue">
+			<h1>v-if/ v-show 条件</h1>
+			<button v-on:click="showError" >错误</button>
+			<button @click="showSuccess" >成功</button>
+			<p>
+				<!-- <span v-if="error">
+					网络连接错误404
+				</span>
+				<span v-else-if="success">
+					连接成功200
+				</span> -->
+				<!--v-show: 是默认占着位置的，只是控制display：none的属性值的改变-->
+				<span v-show="error">
+					网络连接错误404
+				</span>
+				<span v-show="success">
+					连接成功200
+				</span>
+			</p>
+		</div>
+		<script>
+			new Vue({
+				el:'#div-vue',
+				data:{
+					error : false,
+					success : false
+				},
+				methods:{
+					showError(){
+						this.error = true;
+						this.success = false;
+					},
+					showSuccess(){
+						this.success = true;
+						this.error = false;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

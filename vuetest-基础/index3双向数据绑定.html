@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试-双向数据绑定方法</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="div-vue2">
+			<p>请输入姓名：<input type="text" v-on:keyup="name1" ref="name" :value="name"  />
+				&nbsp;您输入的值是：<span v-text="name"></span></p>
+			<p>请输入年龄：<input type="text" v-on:keyup="age1" v-model="age" placeholder="请输入年龄" />
+				&nbsp;您输入的值是：{{age}}</p>
+		</div>
+		<script>
+			new Vue({
+				el:'#div-vue2',
+				data:{
+					name : 'wupei',
+					age : 26
+				},
+				methods:{
+					name1(){
+						//-------1.获取输入内容方式1. ref属性定义, .$refs.name.value获取
+						//console.log(this.$refs.name.value);
+						this.name = this.$refs.name.value;
+						console.log('您已经输入了'+this.name);
+					},
+					age1(){
+						//2.------------有v-model绑定可以直接获取
+						this.age = this.age; 
+						console.log('您已经输入了年龄'+this.age);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

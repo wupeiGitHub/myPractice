@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试-循环指令v-for</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			p{
+				width:200px; height: 100px; border: 1px solid red ;
+				background: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div-vue">
+			<h1>v-for循环条件</h1>
+			<span>-----------1.遍历数组-----------</span>
+			<ul>
+				<li v-for="val in types">
+					<!-- {{val}} -->
+					<span v-text="val"></span>
+				</li>
+			</ul>
+			<span>-----------2.遍历对象-----------</span>
+			<ul>
+				<li v-for="(value,key,index) in objects">
+					{{index}}-----{{key}}-----{{value}}
+				</li>
+			</ul>
+			<span>-----------3.遍历数组中对象值（多嵌套）-----------</span>
+			<ul>
+				<!--遍历数组：(user,index) in user-->
+				<li v-for="(user,index) in users">
+					{{index+1}} -------{{user.name}}-----{{user.age}}
+					<ul v-if="user.infos != 'undefined'">
+						<!--遍历对象：(value,key) in user.infos-->
+						<!-- <li style="list-style: circle;" v-for="(value,key) in user.infos">
+							{{key}} --- {{value}}
+						</li> -->
+						<li style="list-style: circle;" v-for="(item,key,index) in user.infos">
+							{{index+1}} --- {{key}} --- {{item}}
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<script>
+			new Vue({
+				el:'#div-vue',
+				data:{
+					types:['person1','person2','person3'],
+					objects:{
+							name:'wupei', 
+							age:20, 
+							wegiht: '50kg'
+					},
+					users:[
+						{
+							name:'wupei', 
+							age:20, 
+							infos:{aaa:'111', bbb:'2222', ccc: '3333'}
+						},
+						{name:'wupei2', age:25},
+						{name:'wupei3', age:27},
+					]
+				},
+				methods:{
+					showError(){
+						this.error = true;
+						this.success = false;
+					},
+					showSuccess(){
+						this.success = true;
+						this.error = false;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

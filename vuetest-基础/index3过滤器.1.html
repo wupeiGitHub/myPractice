@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="div-vue">
+			  <div class="div1" @click="clk1">
+				  <!-- @click.stop：在click后加上.stop表示取消冒泡传递 -->
+				  <div class="div2" @click.stop="clk2"> 
+					  <button  @click="clk3($event)"> 点我 </button>
+				  </div>
+			  </div>
+
+		</div>
+		<script>
+			new Vue({
+				el:'',
+				data:{
+					
+				},
+				methods:{
+					
+				},
+				filters:{
+					
+				}	
+			});
+		</script>
+	</body>
+</html>

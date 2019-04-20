@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="div-vue2">
+			<!-- v-mode和v-bind不能同时存在 -->
+			<!-- v-mode：双向数据绑定，前台输入内容和vuejs中的变量值实时更新，响应式 -->
+			<!-- v-bind：在html标签中动态获取vuejs中的属性值 -->
+			<p>请输入姓名：<input type="text" v-on:keyup.enter="name1()" v-model="name" />&nbsp;您输入的值是：<span v-text="name"></span></p>
+			<p>请输入年龄：<input type="text" v-on:keyup="age1()" v-model="age" /></p>
+		</div>
+		<script>
+			new Vue({
+				el:'#div-vue2',
+				data:{
+					name : 'wupeittt',
+					age : 26
+				},
+				methods:{
+					name1(){
+						console.log('您已经输入了'+this.name);
+						this.name = this.name;
+					},
+					age1(){
+						this.age = this.age;
+						console.log('您已经输入了年龄'+this.age);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

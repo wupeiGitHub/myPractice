@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试-双向数据绑定方法</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="div-vue3">
+			<h1> Computed  计算属性</h1>
+			<button v-on:click="(a++)">Add to A</button>
+			<button v-on:click="b++">Add to A</button>
+			<p>A - {{a}}</p>
+			<p>B - {{b}}</p>
+			<p>A+age = {{addToA}}</p>
+			<p>B+age = {{addToB}}</p>
+		</div>
+		<script>
+			new Vue({
+				el:'#div-vue3',
+				data:{
+					a : 0,
+					b : 0,
+					age : 18
+				},
+				methods:{
+					/* addToA(){
+						console.log('a-----');
+						return this.age+this.a;
+					},
+					addToB(){
+						console.log('b-----');
+						return this.age+this.b;
+					} */
+			
+				},
+				computed:{
+					//-------------计算属性,调用时不需要使用()
+					//-------------性能优化了, 耗时和大量变动Dom时可以用这个
+					addToA(){
+						console.log('a-----');
+						return this.age+this.a;
+					},
+					addToB(){
+						console.log('b-----');
+						return this.age+this.b;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

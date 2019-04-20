@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue小测试</title>
+		<link href="./css/index.css" rel="stylesheet" type="text/css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="div-vue">
+			  <div class="div1" @click="clk1">
+				  <!-- @click.stop：在click后加上.stop表示取消冒泡传递 -->
+				  <div class="div2" @click.stop="clk2"> 
+					  <button  @click="clk3($event)"> 点我 </button>
+				  </div>
+			  </div>
+			  <p>
+				  <!--  @click.once 表示该事件只能被执行一次-->
+				  <button  @click.once="once($event)"> 点我2 </button>
+				  <a href="http://www.baidu.com" @click="open($event)">百度连接</a>
+				  <!--  @click.prevent 表示取消标签对应的默认事件行为-->
+				  <a href="http://www.baidu.com" @click.prevent="open2($event)">百度连接</a>
+			  </p>
+			  
+			  
+			  <!--语义化的键盘事件-->
+			  <p>
+					<input @keydown="keyOn('任意键');" value="" />
+					<input @keydown.enter="keyOn('enter');" />
+					<input @keydown.up="keyOn('up上');" />
+					<input @keydown.space="keyOn('space空格');" />
+					<input @keydown.a="keyOn('a键');" />
+					<input @keypress="keyOn('按下了');" />
+			  </p>
+			  
+			  <!--过滤器的使用， vue中用filters , 页面用法：{{ 参数值 | 过滤器方法名称（参数）}}-->
+			  <p>
+				  <span>{{3.1415926 | number(3)}}</span> ----------
+				  <span>{{6 | addZero}}</span>
+			  </p>
+			  
+			  
+		</div>
+		<script src="./js/vue.js"></script>
+	</body>
+</html>
