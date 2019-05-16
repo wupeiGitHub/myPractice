@@ -4,6 +4,14 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script>
+			console.log("NaN == NaN: ",NaN == NaN); //false
+			console.log("NaN === NaN: ",NaN === NaN); //false
+			console.log("undefined == null: ",undefined == null); //true
+			console.log("undefined === null: ",undefined === null); //false
+			console.log("Number(null): ", Number(null)); //0
+			console.log("Number(undefined): ", Number(undefined)); //NaN
+			console.log("Number('1234hhh'): ", Number('1234hhh')); //NaN
+			
 			//--------------------Null和Undefined两种类型的比较
 //			相同点:
 //				1)都只有一个值
@@ -34,15 +42,6 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			//------------------案例2==========================
 			var a =  'abc';
 	        a.len = 4;
@@ -58,8 +57,25 @@
 	        //NaN在==恒等比较时，只要两边出现一个NaN就返回false
 	        console.log(" typeof a :", typeof a); //boolean
 	        console.log(" Number('boolean') :", Number('boolean')); //NaN
-	        console.log(" typeof a == b :", typeof a == b); //false 
-	        
+	        console.log(" typeof a == b :", typeof a == b); //false 先算typeof a的值后再 比较恒等 , 'boolean' == 1->NaN == 1
+	        console.log(" typeof (a == b) :", typeof (a == b) ); //boolean 先算typeof a的值后再 比较恒等 , 'boolean' == 1
+			
+			//------------------isNaN方法注意,系统会先调用Number方法,然后把number转换的值和字符串'NaN'比较恒等
+			//----------------所以一般isNaN的参数是数值或者是字符串类型的数值都会返回false,其他情况都会返回true
+			console.log("isNaN('NaN')", isNaN('NaN')); //true
+			console.log("isNaN(NaN)", isNaN(NaN)); //true
+			console.log("isNaN(123)", isNaN(123)); //false
+			console.log("isNaN('123')", isNaN('123')); //false
+			console.log("isNaN('ss123ss')", isNaN('ss123ss')); //true
+			console.log("Number('NaN')", Number('NaN')); //NaN
+			console.log("Number(NaN)", Number(NaN)); //NaN
+			
+			
+			console.log('-------------------------');
+			console.log("parseInt(NaN)", parseInt(NaN)); //NaN
+			console.log("parseInt('NaN')", parseInt('NaN')); //NaN
+			console.log("parseInt('12ddd')", parseInt('12ddd')); //12
+			console.log("parseFloat('12ddd')", parseFloat('12ddd')); //12
 		</script>
 	</head>
 	<body>

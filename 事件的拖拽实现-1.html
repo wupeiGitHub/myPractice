@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js实现拖拽效果</title>
+		<style>
+			div{
+				width: 100px;
+				height: auto;
+				background:pink;
+				border-width: thick;
+				text-align: center;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			 点击鼠标，进行拖拽
+		</div>
+		<script type="text/javascript">
+ 			function drag(ele){
+				var disX, disY;
+				ele.onmousedown = function(e){
+					var compStyle = window.getComputedStyle(ele,null); //获取行间样式之外的css属性值
+					//ele.style.left: 只能获取行间/行内样式属性值
+					//console.log(compStyle.left);
+					disX = e.pageX - parseInt(compStyle.left); //鼠标距离减去 元素左浮动距离
+					disY = e.pageY - parseInt(compStyle.top);
+					//console.log(disX);
+					document.onmousemove = function(evt){
+						//console.log('==='+disY);
+						ele.style.left = evt.pageX - disX +'px';
+						ele.style.top = evt.pageY - disY +'px';
+						//console.log('111------'+(ele.style.left));
+					}
+					document.onmouseup = function(){
+						//document.onmousemove = false; //取消元素移动的绑定事件1
+						//document.onmousemove = null;//取消元素移动的绑定事件2
+						document.onmousemove = '';//取消元素移动的绑定事件3
+						console.log('onmouseup------');
+					}
+				}
+			}
+			
+			var div = document.getElementsByTagName('div')[0];
+			drag(div); 
+		</script>
+	</body>
+</html>

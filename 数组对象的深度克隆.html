@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组的深浅克隆</title>
+		<script>
+				//浅克隆: 单词的复制数组的值,但是如果数组中的值包含引用类型时,复制的是值的引用(会出现当一方数组改动引用值是另一方复制的值也会改变)
+				//---当数组中的值都是原始类型值是浅克隆没有问题,反正需要深度克隆
+				var arr = [1, 22, 33,
+							bb = {a: 'a1', b: 'b1', c: 'c1', d: [6, 66, 666]},
+							cc = ['a','b','c',{name: 'wupei', age: 27, other : [1,2,4,5]}]
+						  ];
+					
+				//----------浅克隆
+				var newArr = [];
+				for(var i=0; i< arr.length; i++){
+					newArr.push(arr[i]);
+				}
+				console.log('浅克隆数组newArr: '+newArr);
+				console.log('bb.a: '+bb.a);
+				//arr.bb.a = 'a2';
+				//console.log('arr.bb.a: '+arr.bb.a);
+				//console.log('newArr.bb.a: '+newArr.bb.a);
+				
+				//------对象数组的深度克隆
+				//-------遍历对象: for(var prop in obj)
+				//-----1:看看是不是原始类型 typeof X = 'object'
+				//-----2:如果是引用值判断是数组还是对象 instanceof 或者toString 或者constructor
+				//-----3:建立相对应的数组或对象
+				//----4:递归调用
+				
+				//参数说明: origin 原始对象, target克隆后的新对象
+				function deepClone(origin, target){
+					var target = target || {},
+						toStr = Object.prototype.toString,
+						arrStr = "[object Array]";
+					for(var prop in origin){
+						if(origin.hasOwnProperty(prop)){ //只拿去自身的属性(原型上的属性值不处理)
+							if(origin[prop] !== 'null' && typeof(origin[prop]) == 'object'){
+// 								if(toStr.call(origin[prop]) == arrStr){
+// 									target[prop] = [];
+// 								}else{
+// 									target[prop] = {};
+// 								}
+								target[prop] = (toStr.call(origin[prop]) == arrStr) ? [] : {};
+								//递归
+								deepClone(origin[prop], target[prop]);
+							}else{
+								target[prop] = origin[prop];
+							}
+						}
+					}
+					return target;
+				}
+				
+				var newArr2 = deepClone(arr, []);
+				console.log('newArr2: '+newArr2);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

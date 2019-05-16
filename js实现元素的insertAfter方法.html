@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>封装insertAfter方法，类似insertBefore</title>
+	</head>
+	<body>
+		<div>
+			<i></i>
+			<b></b>
+			<span></span>
+		</div>
+		<script>
+// 			function insertAfter(){
+// 				
+// 			}
+			//直接在Elment.prototype原型链上进行编写
+			/**
+			 *  targetNode : 要插入的目标元素
+			 */
+			Element.prototype.insertAfter = function(targetNode, afterNode){
+				var nextElemt = afterNode.nextElementSibling; //获取afterNode元素的后一个节点
+				if(nextElemt === null){
+					this.appendChild(targetNode); //把目标节点直接插入到当前元素的最后
+				}else{
+					this.insertBefore(targetNode, afterNode); //把目标元素插入的下个兄弟节点前
+				}
+			}
+			
+			var div = document.getElementsByTagName('div')[0];
+			var b = document.getElementsByTagName('b')[0];
+			var span = document.getElementsByTagName('span')[0];
+			var label = document.createElement('label');
+			div.insertAfter(label,span); //将label标签插入到span元素节点之后.
+			
+			
+		</script>
+	</body>
+</html>

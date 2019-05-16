@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			//---------求一个字符串中的字节总长度
+			//---注意:英文数字符号等都是占一个字节长度, 汉字是占两个字节长度的
+			//----比如: 'abc133我' 长度是10 
+			
+			function ziJieLen(str){
+				var len = 0;
+				for(var i =0; i<str.length; i++){
+					if(str.charCodeAt(i) <= 255){ //获取字符串中的每个字符吃unicode编码值
+						len ++;
+					}else{
+						len += 2;
+					}
+				}
+				return len;
+			}
+			//---------方法2
+			function ziJieLen2(str){
+				var len = str.length; //默认字符串长度
+				for(var i =0; i<str.length; i++){
+					if(str.charCodeAt(i) > 255){ //发现汉字长度加一
+						len ++;
+					}
+				}
+				return len;
+			}
+			console.log('求一个字符串的字节总长度：'+ziJieLen('12345678我你她'));
+			
+			
+			
+			console.log('{}+{}===='+({}+{})); //[object Object][object Object]
+			var a = []+[];
+			console.log(Boolean(a)); //false
+			console.log('Number([]+[])======',Number(a)); //0
+			console.log('[] == ![]======',[] == ![]); //true
+			console.log('[] == []======',[] == []); //false
+		</script>
+	</body>
+</html>

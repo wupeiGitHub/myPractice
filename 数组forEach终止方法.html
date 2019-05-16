@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//正常的数组foreach循环时,用break是会报错的.break在js中只能用于for和switch循环的终止,而用return是无效的
+			var arr = [1,3,5,6,7,10];
+			
+			//var tag = false;
+			/* arr.forEach(function(item,i){
+				//console.log('index = ',i);
+				if(!this.tag){
+					console.log('item == ',item);
+				}
+				if(item === 5){
+					this.tag = true;
+				}
+			},{}) */
+					
+			console.log(arr);
+			var arr2 = Array.prototype.slice.call(arr); //拷贝一份数组,引用地址也改变
+			arr2.push(99);
+			//console.log(arr2);
+			console.log("arr2 : ", arr2);
+			
+			//--------------------方法2 :利用箭头函数, 和数组的splice改变原数组方法进行更改
+			arr2.forEach((item,i)=>{
+				console.log('item == ',item);
+				if(item === 5){
+					arr2 = arr2.splice(0);
+				}
+			},{})
+			console.log("arr2后 : ", arr2);		
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

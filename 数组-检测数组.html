@@ -41,6 +41,27 @@
 			//ECMAScript5新增了Array.isArray()方法
 			var arr = [1,2,3];
 			console.log(Array.isArray(arr)); //true
+			
+			
+			
+			//-----------------5.constructor
+			var arr2 = [1,2,3];
+			console.log("arr2.constructor : "+arr2.constructor); //function Array() { [native code] }
+			var objs = {};
+			console.log("objs.constructor : "+objs.constructor); //function Object() { [native code] }
+			
+			
+			//-------------进制转换,进制是从2-36开始
+			console.log("parseInt(3,8) : "+parseInt(3,8)); //8进制的3转换为10进制的值是 3
+			console.log("parseInt(3,2) : "+parseInt(3,2)); //2进制的3转换为10进制的值是 NaN
+			console.log("parseInt(3,0) : "+parseInt(3,0)); //0进制的3转换为10进制的值是 NaN/3/报错,不同浏览器处理结果不一样
+			
+			
+			console.log("--------------: "+parseInt(10,6)); //6
+			console.log("--------------: "+parseInt(11,6)); //7
+			
+			
+			
 		</script>
 	</head>
 	<body>

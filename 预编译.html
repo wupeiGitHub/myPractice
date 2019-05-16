@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>预编译</title>
+		<script>
+			//------------连续赋值, 在全局上定义的的变量都是window全局上的变量, 用var和不用var都是window全局下的
+			//-----注意:在js中直接赋值 b=123,就相当于 window.a = 123;
+			//------在函数体内定义的比变量都是局部的变量
+			var a = b = 123;
+			console.log("window.a :" ,window.a); 
+			console.log("window.b :" ,window.b);
+			console.log(" a, b :" , a, b);
+			
+			
+			//----------------------------------
+// 			函数预编译的步骤
+// 			1.先创建一个AO(Activetion Object)对象, 也就是执行期上下文环境 --------可简单理解为冰箱
+// 			2.把函数形参和变量声明(var关键字)的名字拿到作用域的顶部作为AO的属性名,然后赋值为undefined
+// 			3.再把实参和形参统一
+// 			4.在函数体内部查找函数声明(function关键字),值赋予函数体.相当于完全搬走函数声明
+			
+			function fn(a){
+				console.log(a); //ƒunction a(){}
+				
+				var a = 123;
+				console.log(a); //123
+				
+				function a(){}
+				console.log(a); // 123
+				
+				var b = function (){}
+				console.log(b); //function (){}
+				
+				function c (){}
+				
+			}
+			
+			fn(9);
+			
+			//-------全局预编译步骤: 它和函数预编译一样,但是没有第三步操作,而且创建的对象是GO（Global Oboject）全局上下文对象 ===>window对象
+			console.log("var定义前访问aa1 ===== "+aa1); //function aa1 (){ }
+			var aa1 = 666;
+			console.log("var定义后访问aa1 ===== "+aa1); //666
+			function aa1 (){ }
+			console.log("函数定义后访问aa1 ===== "+aa1); //666
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

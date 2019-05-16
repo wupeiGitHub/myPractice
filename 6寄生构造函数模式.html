@@ -5,20 +5,22 @@
 		<title></title>
 		<script>
 			//这种模式其实和工厂模式很像，除了使用new操作符并把使用的包装函数叫做构造函数外，
-			//和工厂模式可以说是一模一样的，这种模式的基本思想是创建一个函数，该函数的作用仅仅是封装创建对象的代码，然后再返回新创建的对象
+			//---和工厂模式可以说是一模一样的，这种模式的基本思想是创建一个函数，
+			//----该函数的作用仅仅是封装创建对象的代码，然后再返回新创建的对象
 			function Person(name, age) {
-			 var o = new Object();
+				 var o = new Object();
 				 o.name = name;
 				 o.age = age;
 				 o.sayName = function() {
-				  console.log('name = ',this.name);
+					console.log('name = ',this.name);
 				 }
-			 return o;
+				 return o;
 			}
 			 
+			//console.log('------'+Person('222',99).age);
 			var person1 = new Person("Nicholas", 29);
 			person1.sayName(); // Nicholas
-			
+			console.log('------'+person1.age);
 			
 			// 寄生构造函数模式和工厂模式真的是很像，那么既然有了工厂模式，
 			//为什么还要有寄生构造函数模式呢？其实这个模式主要是用来给js原生的构造函数定义一些新的方法，我们可以看下面这个例子
@@ -28,12 +30,16 @@
 				 console.log(...arguments); //["red", "blue", toPipedString: ƒ]
 				 values.toPipedString = function() {
 				 	console.log('this = ', this); //"red","blue"
+					console.log('this instanceof Array: ', this instanceof Array); //true
 				    return this.join("|");
 				 }
 				 return values;
 			}
 			 
 			var colors = new SpecialArray("red","blue");
+			console.log('colors------'+colors);
+			console.log('colors typeOf------'+typeof colors); //object
+			console.log('colors instanceOf------'+ (colors instanceof Array)); //true
 			console.log(colors.toPipedString()); // red|blue
 		</script>
 	</head>

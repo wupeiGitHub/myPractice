@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js基本练习题</title>
+		<script>
+			//----------------------------------1.计算2的n次幂的值
+			//-----2的2次幂值是 2*2 = 4
+			//-----2的3次幂值是 2*2*2 = 8
+			//-----2的3次幂值是 2*2*2*2 = 16
+			function nSubn(num,n){
+				var sum = 1;
+				for(var i=0; i < n; i++){
+					sum *= num;
+					//console.log('sum = '+sum);
+				}
+				return sum;
+			}
+			
+			var number = nSubn(4, 4);
+			console.log("number = "+number);
+			
+			//es6提供简写方式 **
+			function nSubn2(num,n){
+				return num ** n;
+			}
+			console.log("求n次幂的值：number2 = "+nSubn2(4,4));
+			
+			
+			//----------------------------------2.计算n的阶乘的值
+			//-----5!: 5*4*3*2*1 = 120
+			//-----4!: 4*3*2*1 = 24
+			//-----3!: 3*2*1 = 6
+			function jieChen(n){
+				var i = 1, sum = 1, str = '';
+				while(i <= n){
+					sum *= i; //sum = sum * i;
+					str +=  (i+'*');
+					//console.log(str);
+					i++;
+				}
+				return str.substr(0,str.length-1)+' = '+sum;
+			}
+			var jcNum = jieChen(5);
+			console.log("方法1求阶乘的值是："+jcNum);
+			
+			function jieChen2(n){
+				var sum = 1, str = '';
+				for(var i = n; i>=1; i--){
+					sum *= i; 
+					str +=  (i+'*');
+					//console.log(str);
+				}
+				return str.substr(0,str.length-1)+' = '+sum;
+			}
+			var jcNum2 = jieChen2(5);
+			console.log("方法2求阶乘的值是："+jcNum2);
+			
+			//----------------------------------3.输入三位的整数,把三位整数反向输出
+			//-----125 输出521
+			//-----369 输出963
+			function zhenShuRervese(number){
+				var lastNum = number % 10;
+				var middleNum = (number % 100 - lastNum) / 10;
+				var firstNum = (number - (middleNum*10+lastNum)) / 100;
+				//console.log(lastNum, middleNum, firstNum );
+				return lastNum+''+middleNum+''+firstNum;
+			}
+			var t = zhenShuRervese(923);
+			console.log("三位整数反转：",t);
+			//-----------------------------方法2-------
+			function zhenShuRervese2(number){
+				number = String(number);
+				return number.substr(2,1)+number.substr(1,1)+number.substr(0,1);
+			}
+			var t2 = zhenShuRervese2(890);
+			console.log("三位整数反转：",t2);
+			//-----------------------方法3
+			function rervese(number){
+				var str = '';
+				for(var i= number.length-1; i>=0; i--){
+					str += (number+'').charAt(i); //截取字符串第i个下标值
+					//str += (number+'')[i]; //截取字符串第i个下标值
+				}
+				return str;
+			}
+			var t3 = rervese('1111118905666666669900eeee');
+			console.log("多位整数反转：",t3);
+			
+			//---------------------------------4.输入几个数,获取最大的一个数
+			function maxNum(a, b, c){
+				var arr = [...arguments]; //将类参数列转为数组
+				console.log(arr);
+				return Math.max.apply(null,arr);
+			}
+			console.log(maxNum(11, 66, 2));
+			
+			//-------------------------------5.著名的斐波那契额数列
+			//----------  值：1 1 2 3 5 8 13 21 34 55 .....到第n项值: 后面的数是前面两位的和 
+			//--------- 下标：1 2 3 4 5 6  7  8  9  10
+			//----规律:  第n位的值是 n-2次数运算/
+			//-------------根据斐波那契额数列规律，求第n个数的值是多少
+			function fblqeshulie(n){
+				var first, second, thrid;
+				first =1, second = 1, thrid = null;
+				for(var i=0; n>2 && i< n-2; i++){
+					thrid = first + second;
+					first = second;
+					second = thrid;
+				}
+				return thrid;
+			}
+			console.log("斐波那契额数列  第n个数的值:"+fblqeshulie(3));
+			
+			//------------------6.判断1-100内的质数(素数)
+			//-----质数: 只能被1和自身整数的数,(1除外), 3, 5, 7, 11 ......
+			function zhiShu(){
+				var count = 0;
+				var zsNumstr = '';
+				for(var i=0; i < 100; i++){ // 1.判断1-100内的每一个数
+					for(var b=1; b <= i; b++){ // 2.判断1到自身内能被整除的次数
+						if(i % b == 0){ // 余数的0表示是可以被整除
+							count ++; //计算器加1
+						}
+					}
+					if(count == 2){ // 是否是只被整除2次,2次表示是质数
+						zsNumstr += i+'、';
+					}
+					count = 0; //置为0 
+				}
+				return zsNumstr.substring(0, zsNumstr.length-1);
+			}
+			var nums = zhiShu();
+			console.log("1-100内的质数有："+nums);
+			
+			//------------------求质数的优化写法
+			function zhiShu2(){
+				var count = 0;
+				var zsNumstr = '';
+				for(var i=2; i < 100; i++){ // 1.判断2-100内的每一个数,1不是质数,所有从2开始. 
+					for(var b=1; b <= Math.sqrt(i); b++){ //减少循环次数
+						if(i % b == 0){ // 余数的0表示是可以被整除
+							count ++; //计算器加1
+						}
+					}
+					if(count == 1){ // 是否是只被整除1次,1次表示只能被1整除
+						zsNumstr += i+'、';
+						document.write(i+" ")
+					}
+					count = 0; //置为0 
+				}
+				return zsNumstr.substring(0, zsNumstr.length-1);
+			}
+			var nums2 = zhiShu2();
+			console.log("优化写法：1-100内的质数有："+nums2);			
+			
+			//-------------向上取整 math.ceil 向下取整 math.floor
+			//console.log("Math.sqrt求一个数的开方值："+ Math.sqrt(9)); //3
+			console.log("Math.sqrt求一个数的开方值："+ Math.ceil(Math.sqrt(99)));
+			
+			
+			//------------阶乘
+			function jc(n){
+				if(n == 1){
+					return 1;
+				}
+				return n * jc(n-1);
+			}
+			var jcNum = jc(4); //4*3*2*1 = 24  
+			console.log('jcNum ======', jcNum);
+			
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

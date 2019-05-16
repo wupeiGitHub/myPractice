@@ -80,7 +80,52 @@
 			instance1.method3();//会先后调用method2和method1 */
 			
 			
-
+			//------------------------------案例5--------------------
+			//----定义一个函数,然后返回多个函数,以数组形式返回
+			function biBao(){
+				var arr = [];
+				for(var i=0; i< 10; i++){
+					//此写法相当于 arr[i] = 函数体, 函数体中的内容是在当前函数被调用时才执行,调用时的i已经在biBao()方法调用时循环完毕了所以i=10
+// 					arr[i] = function (){
+// 						console.log('i的值是 = '+i); // i=10
+// 					}
+					
+					(
+					function t(j){
+						arr[j] = function (){ console.log('当前得到的j的值是 '+j)} 
+					}(i)
+					)
+				}
+				return arr;
+			}
+			var bibaoArr = biBao(); //把函数返回值arr函数数组赋值给变量bibao
+			//循环调用/执行 数组中的每个函数
+			for(var j=0; j<10; j++){
+				bibaoArr[j]();
+			}
+			
+			
+			
+			
+			
+			/* function a(){
+				var num = 999;
+				function b(){
+					alert('bbbbb=='+num);
+					function c(){
+						alert('ccccccccc=='+num);
+					}
+					c();
+				}
+				b();
+			}
+			a(); */
+			
+			//-----------------
+			
+			
+			
+			
 			
 		</script>
 	</head>

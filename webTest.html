@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试题</title>
+		<script>
+			 /* var sayHello = function( personal ){
+				 if ( personal instanceof Li ){
+					  console.log( '嘿，你好' );
+				 }else if ( personal instanceof Dan ){
+					  console.log( '吃早饭了么' );
+				 }else if (personal instanceof Arthur){
+					  console.log('你今天看起来真漂亮')
+				 }
+			};
+
+			var Li = function(){};
+			var Dan = function(){};
+			var Arthur = function(){};
+			sayHello( new Li() ); // 嘿，你好
+			sayHello( new Dan() ); // 吃早饭了么
+			sayHello( new Arthur() ); // 你今天看起来真漂亮 */
+			
+			//-----------------------原代码分析
+			//1.sayHello定义理解：首先sayHello是一个带参的匿名函数表达式,参数又是一个函数引用, 主要功能就是通过判断函数归属不同来打印出不同的信息
+			//2.关键词判断：通过instanceof判断形参personal的指向(其实是根据原型链查找比较对象是否存在)
+			//3.sayHello调用: 通过new实例化函数调用方式 进行函数引用的参数传递给sayHello函数,又通过第2步比较进行不同情况的信息打印
+			//4.不建议使用instanceof来进行对象比较, 因为多页面嵌套时它可能不准确,而且效率不高.也不建议使用if else维护起来会麻烦,代码臃肿
+			// --------------优化方式
+			/* function sayHello(info){
+				console.log(info);
+			}
+			sayHello('嘿，你好'); 
+			sayHello('吃早饭了么'); 
+			sayHello('你今天看起来真漂亮'); */
+			
+			
+			/* console.log("-------------------~")
+			function Person(type) {
+				console.log('Hi! This is '+type+'!');
+				var obj = {}, objTwo = {};
+				var eat = function(eatType){
+					console.log("Eat "+eatType+"~")
+				}
+				objTwo.eat = eat;
+				switch(type){
+					case 'Li':
+					case 'Dan':
+						var sleep = function(time){
+							console.log('等待'+time / 1000+'秒..');
+							setTimeout(function(){
+								console.log('Wake up after '+time);
+								isRun = true;
+							},time*1000); 
+							return objTwo;
+						}
+						obj.sleep = sleep;
+						//obj.eat = eat;
+						return obj;
+						//break;
+					case 'Jerry':
+						break;	
+				}
+			}*/
+			
+			
+			let TimeTask = function(time,fun){
+			  this.time = time;
+			  this.fun = fun;
+			}
+			let Flow = function(){}
+			Flow.prototype={
+				  _tasks : [],
+				  _callTimeTask : function(task,callback){
+					return function(){
+					  setTimeout(function(){
+						task.fun();
+						callback();
+					  },task.time)
+					}
+				  },
+				  _finishTask : function(){},
+				  add : function(time,fun){
+					this._tasks.push(new TimeTask(time,fun))
+				  },
+				  addFirst : function(time,fun){
+					this._tasks.unshift(new TimeTask(time,fun))
+				  },
+				  runTask : function(){
+					let fuse = this._finishTask;
+					while(this._tasks.length>0){
+					  let task = this._tasks.pop();
+					  fuse = this._callTimeTask(task,fuse);
+					}
+					fuse.call();
+				  },
+				  run : function(){
+					let that = this;
+					setTimeout(function(){
+					  that.runTask();
+					},0);
+				  }
+			} 
+			let Person = function(name){
+				  this.sleep = function(time){
+					this.flow.add(time*1000,()=>{console.log("Wake up after " + time)});
+					return this;
+				  }
+				  this.sleepFirst = function(time){
+					this.flow.addFirst(time*1000,()=>{console.log("Wake up after "+time)});
+					return this;
+				  }
+				  this.eat = function(food){
+					this.flow.add(0,()=>{console.log("Eat " + food + "~")})
+					return this;
+				  }
+				  this.flow = new Flow();
+				  this.flow.add(0,()=>{console.log("Hi! this is " + name + "!")});
+				  this.flow.run();
+				  return this;
+			}
+			
+			//Person("Li");
+			//Person("Dan").sleep(2).eat("dinner");
+			//Person("Jerry").eat("dinner").eat("supper");
+			Person("Smith").sleepFirst(5).eat("supper");
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

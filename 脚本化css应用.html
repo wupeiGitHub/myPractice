@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>脚本化css操作</title>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				background:rgb(100,0,0);
+				border-width: thick;
+				text-align: center;
+			}
+			
+			div::after{
+				content: 'after伪类元素后添加内容';
+				width: 150px;
+				height: 50px;
+				background:pink;
+				border:1px solid red;
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+		</div>
+		<script>
+			var div = document.getElementsByTagName('div')[0];
+			//getComputedStyle(参数1， 参数2) :只能获取,只读样式, 返回的是绝对值(会把百分比，颜色等返回计算后的值)
+			//参数1: 要获取style样式的：普通目标元素
+			//参数2: 要获取伪类样式时的 伪类元素名
+			var eleCss = window.getComputedStyle(div,null); 
+			console.log("eleCss.width : ", eleCss.width); //200px 
+			
+			
+			var eleCss = window.getComputedStyle(div,"after"); 
+			//console.log("eleCss : ", eleCss); //150px
+			
+			//---------------------封装一个兼容IE和其他浏览器的获取属性样式的方法
+			//ele: 目标元素, prop: 获取的属性
+			function getStyle(ele, prop){
+				var styleVal = '';
+				if(window.getComputedStyle){
+					styleVal = window.getComputedStyle(ele,null)[prop];
+				}else{
+					styleVal = ele.currentStyle[prop];
+					console.log('IE----------------');
+				}
+				return styleVal;
+			}
+			
+			console.log('getStyle-----', getStyle(div,'width'));
+		</script>
+	</body>
+</html>

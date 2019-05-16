@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>异步加载js文件的案例</title>
+		<!-- 方法1： defer IE9一下的非W3C标准浏览器可用,特点是： 可用应用于外部和内容js的引用加载,它是先加载但是在页面Dom解析完后渲染之前进行执行js -->
+		<!-- <script type="text/javascript" src="test.js" defer="defer"></script> -->
+		<!-- 方法1： async : W3C标准方式，特点是：只能用于外部js引用，内部不可以。 它是只要加载完毕就会立马执行js -->
+		<!-- <script type="text/javascript" src="test.js" defer="defer"></script> -->
+		
+		<!-- 方法1：通过<script>标签进行自定义<script>的创建， 可以实现按需加载，推荐使用 -->
+	<!-- 	<script type="text/javascript">
+				//------第1步: 创建script标签元素
+				var script = document.createElement('script');
+				//------第2步: 给script标签设置type和src属性值
+				script.type = 'text/javascript';
+				script.src = 'test.js'; // 加入src后,js就开始被加载了
+				
+				//------------------调用src文件中的方法和变量内容--------------
+				if(script.readyState){ //IE浏览器
+					script.onreadystatechange = function(){
+						if(script.readyState == 'complete' || script.readyState == 'loaded'){ //src的文件加载完成
+							test();
+							console.log(' script.readyState --------------------');
+						}
+					}
+				}else{ //其他浏览器 chrom, firefox, safari, opera
+					//由于程序执行代码的速度很快（以微妙执行）, 而src的加载js的时间不一定,大多数情况下 执行代码会先执行,而src的js文件可能还没有加载完毕,所以直接test方法调用会报错
+					//test(); //直接调用自定义引用js中的函数会报错： Uncaught ReferenceError: test is not defined
+					//setTimeout(function(){test()}, 2000); //2s后执行,能执行成功
+					//调用一般test.js中的test函数: 方式2 
+					//script.onload: 表示等script的src文件加载完毕后才进入此方法, 除了IE不兼容,其他浏览器基本都兼容
+					script.onload = function(){
+						test(); //执行成功
+						console.log(' script.onload --------------------');
+					}
+				}
+				
+				
+				//------第3步: 执行对应的test.js文件
+				document.head.appendChild(script); //添加此代码后js才会执行
+		</script>
+		 -->
+		<script>
+			//-------------封装一个自定义加载script的方法
+			//-----------参数说明: url 要加载的文件引用路径, callback 要在src文件加载后的回调函数名
+			function loadScript(url, callback){
+				//------第1步: 创建script标签元素
+				var script = document.createElement('script');
+				//------第2步: 给script标签设置type属性值
+				script.type = 'text/javascript';
+				//------------------调用src文件中的方法和变量内容--------------
+				if(script.readyState){ //IE浏览器
+					script.onreadystatechange = function(){
+						if(script.readyState == 'complete' || script.readyState == 'loaded'){ //src的文件加载完成
+							callback();
+						}
+					}
+				}else{ //其他浏览器 chrom, firefox, safari, opera
+					script.onload = function(){
+						callback(); //执行成功
+					}
+				}
+				//----------为了防止个别onreadystatechange不会变化,所以,把src放到事件绑定下面执行更为精准
+				script.src = url; // 加入src后,js就开始被加载了
+				//------第3步: 执行对应的test.js文件
+				document.head.appendChild(script); //添加此代码后js才会执行
+			}
+			
+			//---调用
+			//loadScript('test.js', test); //会报错,不能识别test
+			//loadScript('test.js', 'test()'); //如果是字符串方式, loadScript的执行 要改成 eval(callback);方式
+			//loadScript('test.js', function(){test()});  //利用匿名函数引用方式进行执行回调函数
+			
+			//--------利用对象和函数引用的方式进行函数调用与传值
+			var tools = {
+				srcUrl : 'test.js',
+				testFn : function(){ console.log('我是testFn的函数内容') },
+				testFn1 : function(){ console.log('我是testFn1的函数内容') },
+				testFn2 : function(){ console.log('我是testFn2的函数内容') }
+			}
+			function loadScript2(url, callback){
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				if(script.readyState){ //IE浏览器
+					script.onreadystatechange = function(){
+						if(script.readyState == 'complete' || script.readyState == 'loaded'){ //src的文件加载完成
+							if(tools[callback]){
+								tools[callback](); // 相当于 拿到tools.callback属性的函数类型的引用后进行调用
+							}else{
+								console.log(callback+' 的属性值在tools工具对象中不存在，请检查');
+							}
+						}
+					}
+				}else{ 
+					script.onload = function(){
+						if(tools[callback]){
+							tools[callback](); // 相当于 拿到tools.callback属性的函数类型的引用后进行调用
+						}else{
+							console.log(callback+' 的属性值在tools工具对象中不存在，请检查');
+						}
+					}
+				}
+				script.src = tools[url]; // 加入src后,js就开始被加载了
+				document.head.appendChild(script); //添加此代码后js才会执行
+			}
+			//-------调用方式:
+			loadScript2('srcUrl', 'testFns');  //利用匿名函数引用方式进行执行回调函数
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

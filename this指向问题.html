@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>this指向</title>
+		<script>
+			//------------------------案例1
+			var a = 123;
+			function fun (){
+				var a = 456;
+				this.a = 789; //当前改的是全局widow下的a变量值
+				console.log('a====='+a); //当前打印的是当前函数中的变量a
+			}
+			fun(); //全局调用函数,表示函数中this指向window, 
+			console.log('a-------'+a);// 789
+			
+			//------------------------案例2
+			var a1 = 6666;
+			function fun2 (){
+				this.a1 = 999; //当前改的是全局widow下的a1变量值
+				console.log('a1====='+a1); //当前打印的是全局变量的a,因为自己函数中没有定义a1
+			}
+			fun2(); //全局调用函数,表示函数中this指向window, 
+			console.log('a1-------'+a1);// 789
+			
+			//------------------------案例3
+			var a2 = 555;
+			function fun3(){
+				//var this = Object.create(fun3.prototype);
+				this.a2 = 66; //在当前函数中的this增加a2属性并赋值
+				console.log('a2====='+a2); //555, 访问的是全局的a2变量
+				console.log('a2222====='+this.a2);  //66, 访问的是当前的
+			}
+			new fun3();//实例化调用方法, 会把在函数中创建this对象
+			console.log('a2====='+a2);  //555
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

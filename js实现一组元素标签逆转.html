@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签逆转</title>
+	</head>
+	<body>
+		<div>
+			<strong></strong>
+			<i></i>
+			<b></b>
+			<span></span>
+			<h1>11</h1>
+			<h2>22</h2>
+			<h3>33</h3>
+			<h4>44</h4>
+		</div>
+		<script>
+			//实现div元素下的所有标签逆转,
+			//思路:先把倒数第二个标签剪切到div元素的最后(用appendChild可以实现剪切),然后依次把倒数第3个第4个剪切到最后
+			function elementReverse(el){
+				var child = 0;
+				var len = el.children.length;  //或者写成el.childElementCount
+				//console.log(len); //3
+				//console.log(el.childElementCount); //3
+				var els = el.children;
+				for(var i =0; i<len; i++){
+					//console.log(els[i]);
+					//console.log(el.children[i]);
+					//console.log('---------1:',el.children);
+					el.appendChild(els[len-i-1]);
+					//console.log('---------2:',el.children);
+				}
+			}
+			
+			var div = document.getElementsByTagName('div')[0];
+			elementReverse(div); //调用反转方法
+		</script>
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>正则表达式</title>
+		<script>
+			//-------------开头或结尾是数字的正则
+			var reg1 = /^\d|\d$/g;
+			var str1 ='1113333ksksk666';
+			console.log(str1.match(reg1)); //["1", "6"]
+			console.log(reg1.test(str1)); //true
+			
+			//--------------开头和结尾都是数字结尾的正则
+			var reg2 = /^\d[\s\S]*\d$/g;
+			var str2 ='1113333ksksk666';
+			console.log(str2.match(reg2)); //["1113333ksksk666"]
+			console.log(reg2.test(str2)); //true
+			console.log(reg2.test('12222222222')); //false
+			
+			//-----------reg.exec()方法的使用
+			//-------exec结合lastIndex的使用
+			var reg = /^\d/gm;
+			var str = '666\n22nsss111\n444222dccc\n444cd';
+			var restArr = reg.exec(str);
+			console.log(restArr); // ["6", index: 0, input: "6nsss111↵444222dccc↵444cd", groups: undefined]
+			console.log('lastIndex='+reg.lastIndex); //1
+			console.log(reg.exec(str)); // ["2", index: 4, input: "666↵22nsss111↵444222dccc↵444cd", groups: undefined]
+			console.log('lastIndex=',reg.lastIndex); //14
+			
+			//-------exec结合子表达式（）\n的使用
+			var reg = /(\w)\1(\d)\2/g; // ()小括号表示字表达 ,小括号后的表示引用第n个子表达式
+			var restArr2 = reg.exec('aa66 bb88');
+			console.log(restArr2); // ["aa66", "a", "6", index: 0, input: "aa66", groups: undefined]
+			console.log(restArr2.length); //3
+			
+			
+			//-------------利用字符串的str.split(reg),  把字符串按正则规则进行拆分
+			var reg3 = /(\w)\1/g; //重复出现字符的匹配
+			var str3 ='aa1bb3cc4cddd';
+			console.log("str3.split(reg3) : ",str3.split(reg3)); //
+			console.log("str3.search(reg3) : ",'tsss tss'.search(reg3)); // 1 匹配的下标值
+			console.log("str3.match(reg3) : ",str1.match(reg3)); //["11", "33", "33", "66"]
+			
+			console.log("-------------------利用字符串的str.replace(reg,'newstr')")
+			//-------------利用字符串的str.replace(reg,'newstr'),  把字符串按正则规则进行替换
+			console.log('a1a2a3a4'.replace('a','new')); //普通替换只能替换掉一个,new1a2a3a4
+			var reg4 = /a/g;
+			console.log('a1a2a3a4'.replace(reg4,'new')); //new1new2new3new4：使用正则的g(全局匹配)可以替换所有的
+			
+			//---------利用正则的子表达式进行字符串的逆转
+			//-------------实现步骤1:正则的反向引用子表达式 reg5
+			//-------------实现步骤2:新的替换值使用$家引用值表示获取子表达式的值
+			//---------'aabb'>>'bbaa'
+			//---------'1122'>>'2211'
+			var reg5 = /(\w)\1(\d)\2/g;
+			console.log('aa22'.replace(reg5,'$2$2$1$1')); //22aa
+			console.log('cc66'.replace(reg5,'$2$1$2$1')); //6c6c
+			console.log('--------', 'cc66'.replace(reg5,function($, $1, $2){return $2+$1+'++++'+$})); //6c6c
+			
+			
+			//---------利用正则表达式进行the-fisrt-name 格式转为 theFirstName小驼峰格式
+			var str6 = 'the-fisrt-name';
+			var reg6 = /-(\w)/g;
+			var newStr6 = str6.replace(reg6,'$1'); //thefisrtname
+			console.log('newStr6===',newStr6);
+			var newStr7 = str6.replace(reg6,function(str, childReg){return childReg.toUpperCase();}); //theFisrtName
+			console.log('newStr7===',newStr7);
+			
+			//---------正向预查,正向断言(？= n)
+			var str7 = 'aa11bbbb';
+			var reg7 = /\w(?=\d)/g; // 匹配字符后跟的是数字的
+			console.log(str7.match(reg7)); // ["a", "1"]
+			reg7 = /\w(?=11)/g; // 匹配字符后跟的是11的
+			console.log(str7.match(reg7)); //["a"]
+			reg7 = /\w(?!11)/g; // 匹配字符后跟不是11的
+			console.log(str7.match(reg7)); //["a", "1", "1", "b", "b", "b", "b"]
+			
+			
+			//------打破贪婪匹配
+			//----什么是贪婪匹配: 在匹配量词时,返回尽量多的数据值出来
+			console.log('----------贪婪匹配--------------'); //
+			//---------贪婪匹配案例:
+			console.log('aaaaa'.match(/a+/g)); //["aaaaa"]
+			//----非贪婪匹配:在量词后加上一个？问号； 在批量量词时,返回值以最少的量的值进行匹配打印
+			console.log('aaaaa'.match(/a+?/g)); //["a", "a", "a", "a", "a"]
+			console.log('aaaaa'.match(/a{2,3}?/g)); // ["aa", "aa"]
+			
+			
+			//-------------利用1000000000000打印 000前加一个点的效果
+			//-------10000 >> 10.000
+			//-------1000000 >> 1.000.000
+			//--------规律: 从后到前加点, 只要是三的倍数就加上空串后加., 且排除不包含单词边界(\B)
+			var reg8 = /(?=(\B)(\d{3})+$)/g;
+			console.log('100000'.replace(reg8,'.'));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

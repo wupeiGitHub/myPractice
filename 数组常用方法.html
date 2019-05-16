@@ -51,7 +51,7 @@
 			
 			//filter： 过滤数组中的每一项的值并返回出来过滤后的新的数组值
 			/*var e1 = arrNum.filter(function(value,index,arr){
-			 	if(value > 5){//只要满足一次，最后el返回值就是true
+			 	if(value > 5){
 			 		console.log('满足条件的数组下标值是 ', index, '值是 ', value);
 			 		return value;
 			 	}
@@ -111,7 +111,7 @@
 			 console.log('splice(0，1，‘插入参数项’)用法 ： ',  arr.splice(0,1, 'wupei', 90));  //[1]
 			 console.log('操作后的原来数组改为：', arr); //["wupei", 90, 2, 3, 4, 5]
 			 
-			 //---------------Es6中的copyWithin 
+			 //---------------Es6中的copyWithin:注意数组的长度复制前后是不变的
 			 //语法：array.copyWithin(target（拷贝位置，必填）, start（元素复制开始位置）, end（结束位置）)
 				/*target	必需。复制到指定目标索引位置。
 				start	可选。元素复制的起始位置。

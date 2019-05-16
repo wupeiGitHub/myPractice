@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>脚本化css操作</title>
+		<style>
+			div{
+				width: 200px;
+				height: auto;
+				background:pink;
+				border-width: thick;
+				text-align: center;
+			}
+			div ul li:nth-last-of-type(odd){
+				background-color: #FFEBCD;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<!-- ul>li{$}*5 -->
+			<ul>
+				<li>1Li</li>
+				<li>2Li</li>
+				<li>3Li</li>
+				<li>4Li</li>
+				<li>5Li</li>
+			</ul>
+		</div>
+		<script>
+			 //-----需求: 要求输入js 的addEventListener给每一个li绑定一个事件,并输出对应的顺序
+			var liEle = document.getElementsByTagName('li');
+			var len = liEle.length;
+			console.log(liEle);
+			
+			/* for(var i=0; i<len; i++){
+				console.log('第 '+i+' 次进入循环 ');
+				(
+					function(j, sltValue){
+						liEle[i].addEventListener('click', function(){
+							//console.log(i,'-------' ,j)
+							//------j:是外边循环的下标index值
+							console.log(j+' -------- '+sltValue+'-----'+liEle[j].innerHTML);
+							console.log('this：', this); //点击的li元素本身
+						}, false)
+					}
+				)(i, liEle[i].innerText);
+			} */
+			
+			//---------------------IE浏览器attachEvent的用法
+			//------------语法: 目标元素.attachEvent('on事件'，函数体)
+			for(var i=0; i<len; i++){
+				console.log('第 '+i+' 次进入循环 ');
+				(
+					function(j, sltValue){
+						liEle[i].attachEvent('onclick', function(){
+							//console.log(i,'-------' ,j)
+							//------j:是外边循环的下标index值
+							console.log(j+' -------- '+sltValue+'-----'+liEle[j].innerHTML);
+							
+							//注意IE的事件attachEvent中的this默认指向window
+							console.log('this：', this); // [object Window] 
+							
+							//如果想改变this指向元素调用本身的话,可以借用call/apply方法调用并改变this指向
+							handles.apply(liEle[j]); //改变handle函数的this指向为liEle[i]
+							//handles(); //调用handles方法
+						})
+					}
+				)(i, liEle[i].innerText);
+			}
+			function handles(){
+				console.log('this的值：', this);
+			}
+		</script>
+	</body>
+</html>

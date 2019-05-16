@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//-----
+			Father.prototype.xingShi = 'Wu';
+			function Father(name){
+				this.name = name;
+				console.log('父类方法被调用了');
+				this.sum = function(){
+					alert(this.name);
+				}
+			}
+			//-----------
+			function Son(){
+				console.log('--------我是son方法');
+				console.log('------------');
+				return 'son';
+			}
+			
+			//-------------（圣杯继承）完美继承写法1
+			function inherit(target, origin){
+				var fn = function(){}
+				fn.prototype = origin.prototype; //把父原型赋值给fn中间函数原型
+				target.prototype = new fn(); //把中间函数fn实例化给子函数的原型
+				target.prototype.constructor = target; //再把子函数的构造方法指向子函数本身
+				target.prototype.superFn = origin.prototype; //给子函数设置一个继承的原始原型
+			}
+			
+			inherit(Son, Father); //调用继承方法,让Son函数继承Father方法
+			var son = new Son();
+			console.log("son继承father的结果son.属性："+son.xingShi);
+			//console.log("son继承father的结果son.方法："+son.sum);
+			
+			//-------------继承写法2, 利用闭包和自执行函数,效率高代码更加高大上
+			var inherit2 = (function inherit(target, origin){
+				var fn = function(){}
+				return function(){
+					fn.prototype = origin.prototype;
+					target.prototype = new fn();
+					target.prototype.constructor = target;
+					target.prototype.superFn = orging.prototype;
+				}
+			}());
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

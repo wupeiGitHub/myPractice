@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>for循环异步操作-settimeout</title>
+		<script>
+			var arr = [1, 3, 4, 56,88];
+			var len = arr.length;//由于for循环每次都会都中间的条件判断,所以放外面更好
+			
+			
+			
+			//---------需求是每隔一秒打印一个对应循环第几次即i的值
+			//----------实现步骤1: 此方法有漏洞,打印的全是5
+// 			for(var i= 0; i< 5; i++){
+// // 				setTimeout(
+// // 					function(){
+// // 						console.log(i); 
+// // 					}
+// // 				,i*1000)
+// 				setTimeout(
+// 					()=>{
+// 						console.log(i); 
+// 					},i*1000)
+// 			} 
+			
+			//-----------------延生用自执行函数进行传参方式
+			
+			for(var i= 0; i< 5; i++){
+				//注意：这种写法在node.js中是会报错的。
+				//把异步的定时函数放入自执行函数中,并给自执行函数传参数i
+				setTimeout(
+					!function(i){
+						console.log(i); 
+					}(i)
+				,i*1000)
+			}
+			//-----------把setTimeout异步方法放入的一个自执行函数中执行
+			for(var i= 0; i< 5; i++){
+				//把异步的定时函数放入自执行函数中,并给自执行函数传参数i
+				(function(i){
+					setTimeout(function(){console.log('i=',i)}, i*1000)
+				})(i)
+			}
+			console.log('循环外访问var定义的变量i:', i); //5 访问是循环里的var的循环完毕后的值
+			
+			
+			//-------------利用Es6中的let模块化变量进行定义i, let只能在for循环中使用,循环外是访问不了的
+// 			for(let j= 0; j< 5; j++){
+// 				setTimeout(function(){console.log(j)}, j*1000)
+// 			}
+			//console.log('循环外访问let定义的变量j:', j);//Uncaught ReferenceError: j is not defined
+			
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
